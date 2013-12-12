@@ -32,7 +32,7 @@ Join us for a meetup whether you're new to CanJS or want to learn and share stra
 #### Organizer: {{ organizer.name }}
 <div class="organizer">
 {% if organizer.photo %}
-<img src="{{ site.url}}/images/organizers/{{organizer.photo}}" />
+<img src="./images/organizers/{{organizer.photo}}" />
 {% endif %}
 <div class="description">{{ organizer.bio }}</div>
 </div>
