@@ -1,0 +1,92 @@
+safe: true
+pygments: true
+exclude: oldindex.md
+
+cities:
+    - name: "Boston"
+      site: "http://www.meetup.com/CanJS-Boston/"
+      description: "A group based on furthering JavaScript and CanJS development in Boston."
+      organizers:
+        - name: "Dick Williams"
+          bio: "Dick Williams is a Senior Software Engineer at Cengage. He likes CanJS because it turned the spaghetti code of his JavaScript into a lasagna of goodness. And, with FuncUnit, he got a tasty sprinkling of functional testing on top of it all."
+      sponsor:
+        name: "Cengage"
+        description: "South Boston based Cengage Learning is a leading publisher of college textbooks, where we are re-imagining the college textbook to make it more engaging, helps students get better grades, and be less expensive. We are using cutting edge technology and techniques to make college courses and the students that take them smarter."
+        logo: "cengage.jpeg"
+    - name: "Chicago"
+      site: "http://www.meetup.com/CanJS-Chicago"
+      logo: "chicago.jpeg"
+      description: "A CanJS meetup in CanJS's home turf. Come learn CanJS from the people who built it."
+      organizers:
+        - name: "Chris Klanac"
+          photo: "chris-klanac.jpeg"
+          bio: "Chris is a senior web programmer and team manager at Cars.com with over 15 years developing web applications and 10 years experience as team lead/manager. He has expert knowledge with Javascript, HTML5 and CSS3, including JSON, Geolocation, Local Storage, Canvas, Video and WebSockets."
+        - name: "Nate Johnson"
+          bio: "Nate is a JavaScript developer at Cars.com. He is a motivated, self-starting and resourceful technology professional with firm qualifications and practical experience in software engineering, software development and project management."
+          photo: "nate-johnson.jpeg"
+      sponsor:
+        name: "Cars.com"
+        description: "Averaging 22 million visits per month, Cars.com is the premier online destination for new and used vehicles. Cars.com is recognized in the industry for our technology smarts and innovative approach to product development."
+        logo: "carsdotcom.png"
+    - name: "Dallas"
+      site: "http://www.meetup.com/CanJS-Dallas/"
+      description: "A group based on furthering JavaScript and CanJS development in Dallas."
+      sponsor:
+        name: "MATRIX Resources"
+        description: "MATRIX Resources is a leading full-service IT staffing and IT professional services firm, providing top quality IT candidates to fill both contract consulting and permanent positions, and professional services engagements. Privately-held, MATRIX had revenues in excess of $186 million in 2012. Headquartered in Atlanta, we have offices nationwide with more than 250 internal employees and 1,500 staff contract consultants. In 2008, MATRIX was named one of the 50 Best Small and Medium Companies to Work for in America."
+        logo: "matrix.jpeg"
+    - name: "Ft. Lauderdale"
+      site: "http://www.meetup.com/CanJS-Fort-Lauderdale/"
+      logo: "fortlauderdale.jpeg"
+      description: "A group based on furthering JavaScript and CanJS development in Fort Lauderdale."
+      sponsor:
+        name: "Kreate Technology"
+        description: "Kreate Technology builds the tools that everyone in the creative industry will need. With our innovative workflow suite of cloud based applications, there isn’t a workflow or process that our tool can’t help streamline."
+        logo: "kreate.jpeg"
+    - name: "Los Angeles"
+      site: "http://www.meetup.com/CanJS-LA"
+      logo: "losangeles.jpeg"
+      description: "A group based on furthering JavaScript and CanJS development in Los Angeles."
+    - name: "New York"
+      site: "http://www.meetup.com/CanJS-NYC"
+      description: "A group based on furthering JavaScript and CanJS development in NYC. CanJS is a mature, elegant Javascript framework for creating maintainable and performant web applications.  Whether you're a seasoned expert or you're looking to see what CanJS is about, our meetup will involve regular training, project show-and-tells, and discussion."
+      organizers:
+        - name: "Dan Connor"
+          bio: "Dan is a consultant who works in new-media and web development consulting with businesses, artists, and corporations to create scalable, maintainable web applications with a focus on the browser as architecture. He lived in San Francisco, Vancouver, and Minneapolis and currently resides in New York City. Applications that fit the way product development thinks about products is how he tries to build applications: as interchangeable, loosely composed components that can be moved around and swapped out without major refactoring. Dan favors modular JavaScript as well as modular markup/CSS. On the back end he generally uses Rails or NodeJS."
+          photo: "dan-connor.jpeg"
+      sponsor:
+        name: "TransPerfect"
+        description: "TransPerfect provides a full range of language and business services including translation, interpretation, website globalization, subtitling/voiceovers, multicultural marketing, diversity and inclusion consulting, deposition services, and litigation support to multinational companies."
+        logo: "transperfect.jpeg"
+    - name: "Phoenix"
+      site: "http://www.meetup.com/CanJS-Phoenix"
+      description: "A group based on furthering JavaScript and CanJS development in Phoenix."
+      logo: "phoenix.jpeg"
+      organizers: 
+        - name: "Steele Price"
+          photo: "steele-price.png"
+          bio: "Steele Price has been professionally designing and developing databases and Line of Business interfaces to them since 1983. Software development has not only been his primary source of income since; it is his passion. Many of his software development processes grew to fruition by seeing a business or consumer need and working diligently to fulfill that need with a real application. When you love to do something it invades every aspect of your life. Recently he has focused on the Semantic Web, HTML5 and cross-platform Web Enabled solutions. Since 2005 he has been consecutively awarded as a Microsoft MVP, an annual award given to exceptional, independent community leaders who share their passion, technical expertise, and real-world knowledge. His current tool set for Line of Business Applications is CanJS, Microsoft WebAPI, RavenDB and Microsoft Azure."
+      sponsor:
+        name: "Axosoft"
+        description: "Do you want to make a dent in the universe? Axosoft can help!"
+        logo: "axosoft.jpeg"
+    - name: "Raleigh-Durham"
+      site: "http://www.meetup.com/canjs-raleigh-durham"
+      logo: "raleigh-durham.jpeg"
+      description: "A group based on furthering JavaScript and CanJS development in the Raleigh-Durham area."
+    - name: "Seattle"
+      site: "http://www.meetup.com/CanJS-Seattle/"
+      logo: "seattle.jpeg"
+      description: "A group based on furthering JavaScript and CanJS development in the Seattle area."
+      organizers: 
+        - name: "Kyle Buckingham"
+          photo: "kyle-buckingham.jpeg"
+          bio: "Kyle is a Seattle front-end developer who currently develops for a single page Javascript application built on top of CanJS and NodeJS. He is a big believer in using tools with community support that make incredible products that exceed expectations."
+      sponsor:
+        name: "Trade Tech"
+        description: "Trade Tech, based in Bellevue, WA with offices located around the globe, specializes in creating software solutions for the international logistics industry. Trade Tech’s logistics and technology experts have created world-class applications linking sales, operations and accounting processes into a single environment. These applications are proven to help streamline freight forwarders’ and shippers’ supply chains, cut total transportation costs, manage exceptions, deliver visibility, and provide higher levels of customer service to help you compete in today’s complex logistics environment."
+        logo: "trade-tech.png"
+    - name: "Zagreb, Croatia"
+      site: "http://www.meetup.com/CanJS-Zagreb/"
+      logo: "zagreb.jpeg"
+      description: "CanJS Zagreb Meetup. Come and get CanJS training from the CanJS core commiters."
