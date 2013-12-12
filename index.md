@@ -32,7 +32,7 @@ Join us for a meetup whether you're new to CanJS or want to learn and share stra
 #### Organizer: {{ organizer.name }}
 <div class="organizer">
 {% if organizer.photo %}
-<img src="./images/organizers/{{organizer.photo}}" />
+<img src="http://bitovi.github.io/canjsmeetup/images/organizers/{{organizer.photo}}" />
 {% endif %}
 <div class="description">{{ organizer.bio }}</div>
 </div>
@@ -44,7 +44,7 @@ Join us for a meetup whether you're new to CanJS or want to learn and share stra
 #### Sponsor: {{ city.sponsor.name }}
 <div class="sponsor">
 {% if city.sponsor.logo %}
-<img src="./images/sponsors/{{city.sponsor.logo}}" />
+<img src="http://bitovi.github.io/canjsmeetup/images/sponsors/{{city.sponsor.logo}}" />
 {% endif %}
 <div class="description">{{ city.sponsor.description }}</div>
 </div>
