@@ -133,10 +133,10 @@ ATM = can.Map.extend({
 	isChoosingTransaction: function(){
 		return this.attr("state") === "choosingTransaction"
 	},
-	isDeposit: function(){
+	isDepositInfo: function(){
 		return  /deposit/i.test( this.attr("state") );
 	},
-	isWithdrawal: function(){
+	isWithdrawalInfo: function(){
 		return  /withdrawal/i.test( this.attr("state") );
 	},
 	isTransactionReady : function(){
@@ -160,21 +160,12 @@ ATM = can.Map.extend({
 			if( transaction.attr("state") === "executed") {
 				return "successfulTransaction"
 			} 
-			else if(transaction.attr("state") === "executing") {
-				
-				if( transaction instanceof Deposit ) {
-					return "executingDeposit"
-				}
-				if( transaction instanceof Withdrawal ) {
-					return "executingWithdrawal"
-				}
-				
-			} else if(transaction.attr("account")) {
+			else if(transaction.attr("account")) {
 
 				if( transaction instanceof Deposit ) {
-					return "deposit"
+					return "depositInfo"
 				} else if( transaction instanceof Withdrawal ) {
-					return "withdrawal"
+					return "withdrawalInfo"
 				} else {
 					return "invalid-state"
 				}
@@ -280,8 +271,12 @@ can.Component.extend({
 })
 
 
-can.fixture("/verifyCard", function(){
-	return {};
+can.fixture("/verifyCard", function(request, response){
+	if(!request.data || !request.data.number || !request.data.pin) {
+		response(400,{});
+	} else {
+		return {}
+	}
 })
 can.fixture("/deposit", function(){
 	return {};

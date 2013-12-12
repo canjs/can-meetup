@@ -1,6 +1,40 @@
 
 module("ATM system")
 
+test("Good Card", function(){
+	var c = new Card({
+		number: 01234567890,
+		pin: "abcd"
+	});
+	
+	equal( c.attr("state"), "unverified" );
+	
+	stop()
+	c.bind("state", function(ev, newVal){
+		
+		equal(newVal, "verified", "card is verified")
+		
+		start()
+	})
+	
+	c.verify()
+})
+
+test("Bad Card", function(){
+	var c = new Card({});
+	
+	equal( c.attr("state"), "unverified" );
+	
+	stop()
+	c.bind("state", function(ev, newVal){
+		
+		equal(newVal, "invalid", "card is invalid")
+		
+		start()
+	})
+	
+	c.verify()
+})
 
 test("Deposit", function(){
 	expect(4)
@@ -75,20 +109,18 @@ test("ATM basics", function(){
 			atm.chooseAccount(atm.attr("accounts.0"))
 			
 			
-		} else if (newVal === "deposit") {
+		} else if (newVal === "depositInfo") {
 			
-			ok(atm.isDeposit(), "in deposit state");
+			ok(atm.isDepositInfo(), "in deposit state");
 			
 			atm.attr("currentTransaction.amount", 120)
 			
 			atm.attr("currentTransaction").execute();
 			
-			
-		} else if(newVal === "executingDeposit"){
-			ok(atm.isDeposit(), "still in deposit state");
+			ok(atm.isDepositInfo(), "still in deposit state");
 			
 			ok(atm.isTransactionExecuting(), "is executing");
-		} else if( newVal === "successfulTransaction" ) {
+		}  else if( newVal === "successfulTransaction" ) {
 			ok( atm.isTransactionSuccessful() );
 			start();
 		}

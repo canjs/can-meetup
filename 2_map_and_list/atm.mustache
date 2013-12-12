@@ -26,7 +26,7 @@
   			</div>
 		{{/isVerifyingPin}}
 	</p>
-	<a href="javascript://">exit</a>
+	<a href="javascript://" can-click="exit">exit</a>
 {{/isReadingPin}}
 
 {{#isChoosingTransaction}}
@@ -51,7 +51,7 @@
 	</ul>
 {{/isPickingAccount}}
 
-{{#isDeposit}}
+{{#isDepositInfo}}
 	<h2>Deposit</h2>
 	<p>
 		How much would you like to deposit 
@@ -72,9 +72,9 @@
 	{{/if}}
 	
 	
-{{/isDeposit}}
+{{/isDepositInfo}}
 
-{{#isWithdrawal}}
+{{#isWithdrawalInfo}}
 	<h2>Withdraw</h2>
 	<p>
 		How much would you like to withdraw  
@@ -91,7 +91,7 @@
 					{{^isTransactionReady}}DISABLED{{/isTransactionReady}}>Withdrawl</button>
 		<a href="javascript://" can-click="removeTransaction">cancel</a>
 	{{/if}}
-{{/isWithdrawal}}
+{{/isWithdrawalInfo}}
 
 {{#isTransactionSuccessful}}
 	<h2>Transaction Successful!</h2>

@@ -1,0 +1,79 @@
+<html>
+<head>
+	<style>
+		#digital {
+			font-family: monospace;
+			float: left;
+			font-size: 60px;
+			padding: 90px 10px;
+			margin: 0px 20px 0px 0px;
+			border: solid 1px black;
+		}
+	</style>
+</head>
+<body>
+
+  <canvas id="analog"  width="255" height="255"></canvas>
+  <div id="digital"></div>
+  <div>
+  <button id="stop">STOP</button>
+  <button id="start">START</button>
+  </div>
+  
+  <script src="http://code.jquery.com/qunit/qunit-1.12.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+  <script src="http://canjs.com/release/2.0.3/can.jquery.js"></script>
+  <script src="http://canjs.com/release/2.0.3/can.object.js"></script>
+  <script src="http://canjs.com/release/2.0.3/can.fixture.js"></script>
+  <script src="http://canjs.com/release/2.0.3/can.map.setter.js"></script>
+  <script src="analog.js"></script>
+  <script type='text/mustache' id="digital-template">
+  	{{hh}}:{{mm}}:{{ss}}
+  </script>
+  <script>
+  	var timer = new can.Map({
+  		time: new Date()
+  	});
+  		
+  	
+  	new Analog("#analog",{
+  		timer: timer
+  	})
+  	
+  	var pad = function(n){
+  		n = ""+n;
+  		return n.length <= 1 ? "0"+n : n;
+  	}
+  	
+  	$("#digital").html(can.view("digital-template",{
+  		hh: function(){
+  			return timer.attr("time").getHours() % 12
+  		},
+  		mm: function(){
+  			return pad( timer.attr("time").getMinutes() )
+  		},
+  		ss: function(){
+  			return pad( timer.attr("time").getSeconds() )
+  		}
+  	}))
+  	
+  	
+  	var interval,
+  		startTimer = function(){
+  			interval = setInterval(function(){
+		  		timer.attr("time", new Date(timer.attr("time").getTime() + 1000 ))
+		  	},1000)
+  		},
+  		stopTimer = function(){
+  			clearInterval(interval);
+  		}
+  	
+  	startTimer();
+  	
+  	$("#start").click(startTimer);
+  	$("#stop").click(stopTimer);
+  	
+  </script>
+  
+</body>
+</html>
