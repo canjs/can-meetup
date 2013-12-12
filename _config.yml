@@ -41,7 +41,7 @@ cities:
       description: "A group based on furthering JavaScript and CanJS development in Fort Lauderdale."
       sponsor:
         name: "Kreate Technology"
-        description: "Kreate Technology builds the tools that everyone in the creative industry will need. With our innovative workflow suite of cloud based applications, there isn’t a workflow or process that our tool can’t help streamline."
+        description: "Kreate Technology builds the tools that everyone in the creative industry will need. With our innovative workflow suite of cloud based applications, there isn't a workflow or process that our tool can't help streamline."
         logo: "kreate.jpeg"
     - name: "Los Angeles"
       site: "http://www.meetup.com/CanJS-LA"
@@ -84,7 +84,7 @@ cities:
           bio: "Kyle is a Seattle front-end developer who currently develops for a single page Javascript application built on top of CanJS and NodeJS. He is a big believer in using tools with community support that make incredible products that exceed expectations."
       sponsor:
         name: "Trade Tech"
-        description: "Trade Tech, based in Bellevue, WA with offices located around the globe, specializes in creating software solutions for the international logistics industry. Trade Tech’s logistics and technology experts have created world-class applications linking sales, operations and accounting processes into a single environment. These applications are proven to help streamline freight forwarders’ and shippers’ supply chains, cut total transportation costs, manage exceptions, deliver visibility, and provide higher levels of customer service to help you compete in today’s complex logistics environment."
+        description: "Trade Tech, based in Bellevue, WA with offices located around the globe, specializes in creating software solutions for the international logistics industry. Trade Tech's logistics and technology experts have created world-class applications linking sales, operations and accounting processes into a single environment. These applications are proven to help streamline freight forwarders' and shippers' supply chains, cut total transportation costs, manage exceptions, deliver visibility, and provide higher levels of customer service to help you compete in today's complex logistics environment."
         logo: "trade-tech.png"
     - name: "Zagreb, Croatia"
       site: "http://www.meetup.com/CanJS-Zagreb/"

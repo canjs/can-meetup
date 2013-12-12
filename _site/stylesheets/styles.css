@@ -488,8 +488,15 @@ h2, h3, h4{
 	clear: both;
 	padding-top: 10px;
 }
+#content h3{
+	
+}
+
 .organizer img, .city img, .sponsor img{
 	float: left;
-	margin-right: 5px;
 	width: 20%;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+.description{
 }

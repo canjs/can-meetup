@@ -9,7 +9,7 @@ Here you can find a meetup near you as well as find videos and other materials f
 
 ##Cities with Meetups
 {% for city in site.cities %}
-- [{{ city.name }}](#meetup_cities-{{city.name | replace:' ','_' | replace:',','_' | replace:'-','_' | replace:'.','_' | downcase}}) [>>]({{city.site}}){% endfor %}
+- [{{ city.name }}](#upcoming_meetups-{{city.name | replace:' ','_' | replace:',','_' | replace:'-','_' | replace:'.','_' | downcase}}) [>>]({{city.site}}){% endfor %}
 
 ##Learn CanJS
 Join us for a meetup whether you're new to CanJS or want to learn and share strategies on building amazing applications.  Curious about CanJS or what you might learn at a meetup?  Check out this video to follow along as Justin shows you how to build TodoMVC using CanJS.
@@ -19,14 +19,10 @@ Join us for a meetup whether you're new to CanJS or want to learn and share stra
 <iframe width="100%" height="400" src="//www.youtube.com/embed/E9kEM9P0Lp8" frameborder="0"> </iframe>
 
 ##Upcoming Meetups
-
 {% for city in site.cities %}
-###{{city.name}} [>>]({{city.site}})
+###[{{city.name}}]({{city.site}})
 <div class="city">
-{% if city.logo %}
-<img src="{{ site.url}}/images/cities/{{city.logo}}" />
-{% endif %}
-{{ city.description }}
+<div class="description">{{ city.description }}</div>
 </div>
 
 
@@ -38,7 +34,7 @@ Join us for a meetup whether you're new to CanJS or want to learn and share stra
 {% if organizer.photo %}
 <img src="{{ site.url}}/images/organizers/{{organizer.photo}}" />
 {% endif %}
-{{ organizer.bio }}
+<div class="description">{{ organizer.bio }}</div>
 </div>
 {% endfor %}
 
@@ -50,10 +46,16 @@ Join us for a meetup whether you're new to CanJS or want to learn and share stra
 {% if city.sponsor.logo %}
 <img src="{{ site.url}}/images/sponsors/{{city.sponsor.logo}}" />
 {% endif %}
-{{ city.sponsor.description }}
+<div class="description">{{ city.sponsor.description }}</div>
 </div>
 {% endif %}
+
+{% unless forloop.last %}
+<hr style="clear:both"/>
+{% endunless %}
+
 {% endfor %}
+
 
 ##Get Involved
 
