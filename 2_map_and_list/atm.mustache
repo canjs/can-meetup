@@ -69,9 +69,11 @@
 	
 	{{#if isTransactionExecuting}}
 		<div class='warn'>
-			executing 
-			<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
-		</div>
+				<p>
+				<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
+				executing 
+				</p>
+  			</div>
 	{{else}}
 		<button can-click="currentTransaction.execute"
 			{{^isTransactionReady}}DISABLED{{/isTransactionReady}}>Deposit</button>
@@ -90,12 +92,14 @@
 	</p>
 	{{#if isTransactionExecuting}}
 		<div class='warn'>
-			executing 
-			<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
-		</div>
+				<p>
+				<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
+				executing 
+				</p>
+  			</div>
 	{{else}}
 		<button can-click="currentTransaction.execute"
-					{{^isTransactionReady}}DISABLED{{/isTransactionReady}}>Withdrawl</button>
+					{{^isTransactionReady}}DISABLED{{/isTransactionReady}}>Withdraw</button>
 		<a href="javascript://" can-click="removeTransaction">cancel</a>
 	{{/if}}
 {{/isWithdrawalInfo}}
@@ -130,10 +134,12 @@
 			<li can-click="chooseAccount">{{name}} - ${{balance}}</li>
 		{{/each}}
 	</ul>
-	<div class='warning'>
-		printing
-		<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
-	</div>
+	<div class='warn'>
+				<p>
+				<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
+				printing 
+				</p>
+  			</div>
 {{/isExiting}}
 
 
