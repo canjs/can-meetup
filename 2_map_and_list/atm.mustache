@@ -1,4 +1,8 @@
-<h1>canATM</h1>
+<div class="title"><h1>canATM</h1></div>
+
+<div class="screen">
+	<div class="screen-content">
+		<div class="screen-glass">
 {{#isReadingCard}}
 	<h2>Reading Card</h2>
 	<p>Welcome to canATM where there are <strong>never</strong>
@@ -21,8 +25,10 @@
 			 
 		{{#isVerifyingPin}}
 		  	<div class='warn'>
-				verifying 
+				<p>
 				<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
+				verifying 
+				</p>
   			</div>
 		{{/isVerifyingPin}}
 	</p>
@@ -128,3 +134,7 @@
 		<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
 	</div>
 {{/isExiting}}
+
+		</div>
+	</div>
+</div>
