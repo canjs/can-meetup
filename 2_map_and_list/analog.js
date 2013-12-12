@@ -1,7 +1,7 @@
 // parts of this code were adopted from: http://jsbin.com/evodil/28/edit
 var Analog = can.Control({
 	defaults: {
-  			rad: 250
+  		rad: 250
 	}
 }, {
 	init: function(){
@@ -69,3 +69,6 @@ var Analog = can.Control({
 		this.canvas.stroke();
 	}
 });
+
+
+

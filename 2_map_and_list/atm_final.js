@@ -1,6 +1,7 @@
 Card = can.Map.extend({
 	state: "unverified",
 	verify: function(){
+		this.attr("state","verifying")
 		$.post("/verifyCard", this.serialize() )
 		.then(
 			
@@ -122,10 +123,10 @@ ATM = can.Map.extend({
 		return this.attr("state") === "readingCard"
 	},
 	isReadingPin: function(){
-		return /verifyingPin|readingPin/.test( this.attr("state") );
+		return this.attr("state") == "readingPin";
 	},
 	isVerifyingPin: function(){
-		return this.attr("state") === "verifyingPin"
+		return this.attr("card.state") == "verifying"
 	},
 	isPickingAccount: function(){
 		return this.attr("state") === "pickingAccount"
@@ -183,9 +184,7 @@ ATM = can.Map.extend({
 		if(card) {
 			if(card.attr("state") === "verified") {
 				return "choosingTransaction"
-			} else if( card.attr("pin") ) {
-				return "verifyingPin"
-			}
+			} 
 			return "readingPin"
 		}
 		return "readingCard"

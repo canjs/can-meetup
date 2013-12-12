@@ -10,6 +10,9 @@ test("Good Card", function(){
 	equal( c.attr("state"), "unverified" );
 	
 	stop()
+	
+	
+	c.verify();
 	c.bind("state", function(ev, newVal){
 		
 		equal(newVal, "verified", "card is verified")
@@ -17,7 +20,7 @@ test("Good Card", function(){
 		start()
 	})
 	
-	c.verify()
+	equal( c.attr("state"), "verifying", "card is verifying" );
 })
 
 test("Bad Card", function(){
@@ -26,6 +29,7 @@ test("Bad Card", function(){
 	equal( c.attr("state"), "unverified" );
 	
 	stop()
+	c.verify()
 	c.bind("state", function(ev, newVal){
 		
 		equal(newVal, "invalid", "card is invalid")
@@ -33,11 +37,13 @@ test("Bad Card", function(){
 		start()
 	})
 	
-	c.verify()
+	
+	
+	equal( c.attr("state"), "verifying" );
 })
 
 test("Deposit", function(){
-	expect(4)
+	expect(5)
 	// you can only get account details with a card
 	var card = new Card({
 		number: "0123456789",
@@ -48,12 +54,17 @@ test("Deposit", function(){
 		amount: 100,
 		card: card
 	})
+	
+	equal( deposit.attr("state"), "invalid" )
+	
 	stop();
 	
 	Account.findAll(card, function(accounts){
 		ok(true, "got accounts")	
 		deposit.attr("account", accounts[0])
 	})
+	
+	
 	
 	deposit.bind("state", function(ev, newVal){
 		if(newVal === "ready"){
