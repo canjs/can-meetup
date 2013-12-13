@@ -9,7 +9,7 @@ Here you can find a meetup near you as well as find videos and other materials f
 
 ## Cities
 {% for city in site.cities %}
-- [{{ city.name }}](#sponsors-{{city.name | replace:' ','_' | replace:',','_' | replace:'-','_' | replace:'.','_' | downcase}}) [>>]({{city.site}}){% endfor %}
+- [{{ city.name }}](#sponsors_and_organizers-{{city.name | replace:' ','_' | replace:',','_' | replace:'-','_' | replace:'.','_' | downcase}}) [>>]({{city.site}}){% endfor %}
 
 ## Content
 
@@ -23,14 +23,13 @@ Check out the video and follow along as Justin explains how to build TodoMVC in 
 
 <iframe width="100%" height="400" src="//www.youtube.com/embed/E9kEM9P0Lp8" frameborder="0"> </iframe>
 
-## Sponsors
+## Sponsors and Organizers
 {% for city in site.cities %}
 ###[{{city.name}}]({{city.site}})
 <div class="city">
 </div>
 
 
-{% comment %}
 {% for organizer in city.organizers %}
 
 #### Organizer: {{ organizer.name }}
@@ -41,8 +40,6 @@ Check out the video and follow along as Justin explains how to build TodoMVC in 
 <div class="description">{{ organizer.bio }}</div>
 </div>
 {% endfor %}
-
-{% endcomment %}
 
 {% if city.sponsor %}
 #### Sponsor: {{ city.sponsor.name }}
