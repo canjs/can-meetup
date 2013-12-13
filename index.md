@@ -5,24 +5,28 @@ title: CanJS Meetups
 
 # Welcome to CanJS Meetups
 
-Here you can find a meetup near you as well as find videos and other materials from past meetups.  [Find a meetup near you](#upcoming_meetups), check out [what you might learn at a meetup](#learn_canjs), or find out how to [get involved](#get_involved).
+Here you can find a meetup near you as well as find videos and other materials from past meetups.  [Find a meetup near you](#cities), check out [what you might learn at a meetup](#content), or find out how to [get involved](#get_involved).
 
-## Cities with Meetups
+## Cities
 {% for city in site.cities %}
-- [{{ city.name }}](#upcoming_meetups-{{city.name | replace:' ','_' | replace:',','_' | replace:'-','_' | replace:'.','_' | downcase}}) [>>]({{city.site}}){% endfor %}
+- [{{ city.name }}](#sponsors-{{city.name | replace:' ','_' | replace:',','_' | replace:'-','_' | replace:'.','_' | downcase}}) [>>]({{city.site}}){% endfor %}
 
-## Learn CanJS
-Join us for a meetup whether you're new to CanJS or want to learn and share strategies on building amazing applications.  Curious about CanJS or what you might learn at a meetup?  Check out this video to follow along as Justin shows you how to build TodoMVC using CanJS.
+## Content
 
-<iframe width="100%" height="400" src="http://jsfiddle.net/jandjorgensen/EAFb5/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
+At meetups, we'll go over how to build things and use certain features of CanJS.  Here's what we've done in past meetups.
+
+### 1: Building TodoMVC
+
+Check out the video and follow along as Justin explains how to build TodoMVC in CanJS. This covers topics like two-way binding and building an application using `can.Component`.
+
+<iframe width="100%" height="600" src="http://jsfiddle.net/jandjorgensen/EAFb5/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
 
 <iframe width="100%" height="400" src="//www.youtube.com/embed/E9kEM9P0Lp8" frameborder="0"> </iframe>
 
-## Upcoming Meetups
+## Sponsors
 {% for city in site.cities %}
 ###[{{city.name}}]({{city.site}})
 <div class="city">
-<div class="description">{{ city.description }}</div>
 </div>
 
 
