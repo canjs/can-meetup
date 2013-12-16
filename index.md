@@ -23,6 +23,12 @@ Check out the video and follow along as Justin explains how to build TodoMVC in 
 
 <iframe width="100%" height="400" src="//www.youtube.com/embed/E9kEM9P0Lp8" frameborder="0"> </iframe>
 
+### 2: Map and List
+
+Here's a preview of what's happening in upcoming meetups.  Through building an ATM, we demonstrate using `can.Map` and `can.List` to model application state.
+
+<iframe width="100%" height="600" src="http://jsfiddle.net/jandjorgensen/mhPq7/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
+
 ## Sponsors and Organizers
 {% for city in site.cities %}
 ###[{{city.name}}]({{city.site}})
