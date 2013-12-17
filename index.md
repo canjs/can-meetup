@@ -68,12 +68,16 @@ Here's a preview of what's happening in upcoming meetups.  Through building an A
 
 ## Get Involved
 
-###For People
+### For People
 If you're in the area of one of these meetups, the first thing to do is to signup for meetup.com and attend the event. If you want to give a talk on something or help plan future meetups, contact the organizer on the meetup page. If you need starter material or have questions, feel free to reach out to us for assistance.
 
 If you don't live near one of these cities, create a new CanJS meetup! As long as you have an open-invite event, no matter how small, Bitovi will provide you montly workshop and training material. Once you get over 15 people coming to your meetup, someone from Bitovi will come out. If you are outside the US, we will also come out, but when we can schedule a few meetups at once in the general area.
 
-###For Organizations
+### For Organizations
 If you're part of a company that's using CanJS, you can sponsor the meetup by hosting the meetup or purchasing food and drink for attendees. Organizations can also start CanJS meetups.
 
 Sponsor organizations get Bitovi's training and lecture material and their logo listed on the meetup page.
+
+### Contact Us
+
+Contact us for meetup materials or further information at [contact@bitovi.com](mailto:contact@bitovi.com).
