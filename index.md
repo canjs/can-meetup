@@ -15,7 +15,7 @@ Here you can find a meetup near you as well as find videos and other materials f
 
 At meetups, we'll go over how to build things and use certain features of CanJS.  Here's what we've done in past meetups.
 
-### 1: Building TodoMVC
+### Building TodoMVC
 
 Check out the video and follow along as Justin explains how to build TodoMVC in CanJS. This covers topics like two-way binding and building an application using `can.Component`.
 
@@ -23,7 +23,7 @@ Check out the video and follow along as Justin explains how to build TodoMVC in 
 
 <iframe width="100%" height="400" src="//www.youtube.com/embed/E9kEM9P0Lp8" frameborder="0"> </iframe>
 
-### 2: Map and List
+### Map and List
 
 Here's a preview of what's happening in upcoming meetups.  Through building an ATM, we demonstrate using `can.Map` and `can.List` to model application state.
 
