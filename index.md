@@ -11,7 +11,9 @@ Here you can find a meetup near you as well as find videos and other materials f
 {% for city in site.cities %}
 - [{{ city.name }}](#sponsors_and_organizers-{{city.name | replace:' ','_' | replace:',','_' | replace:'-','_' | replace:'.','_' | downcase}}) [>>]({{city.site}}){% endfor %}
 
-## Content
+
+
+## Meetup Content
 
 At meetups, we'll go over how to build things and use certain features of CanJS.  Here's what we've done in past meetups.
 
@@ -19,7 +21,7 @@ At meetups, we'll go over how to build things and use certain features of CanJS.
 
 Check out the video and follow along as Justin explains how to build TodoMVC in CanJS. This covers topics like two-way binding and building an application using `can.Component`.
 
-<iframe width="100%" height="600" src="http://jsfiddle.net/jandjorgensen/EAFb5/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
+<iframe width="100%" height="500" src="http://jsfiddle.net/jandjorgensen/EAFb5/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
 
 <iframe width="100%" height="400" src="//www.youtube.com/embed/E9kEM9P0Lp8" frameborder="0"> </iframe>
 
@@ -27,7 +29,7 @@ Check out the video and follow along as Justin explains how to build TodoMVC in 
 
 Here's a preview of what's happening in upcoming meetups.  Through building an ATM, we demonstrate using `can.Map` and `can.List` to model application state.
 
-<iframe width="100%" height="600" src="http://jsfiddle.net/jandjorgensen/mhPq7/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
+<iframe width="100%" height="500" src="http://jsfiddle.net/jandjorgensen/mhPq7/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
 
 ## Sponsors and Organizers
 {% for city in site.cities %}
