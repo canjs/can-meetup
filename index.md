@@ -15,7 +15,7 @@ Here you can find a meetup near you as well as find videos and other materials f
 
 ## Meetup Content
 
-At meetups, we'll go over how to build things and use certain features of CanJS.  Here's what we've done in past meetups.
+At meetups, we&#39;ll go over how to build things and use certain features of CanJS.  Here&#39;s what we&#39;ve done in past meetups.
 
 ### Building TodoMVC
 
