@@ -74,6 +74,16 @@ cities:
       site: "http://www.meetup.com/canjs-raleigh-durham"
       logo: "raleigh-durham.jpeg"
       description: "A group based on furthering JavaScript and CanJS development in the Raleigh-Durham area."
+    - name: "San Francisco"
+      site: "http://www.meetup.com/CanJS-San-Francisco"
+      organizers:
+        - name: "Bradley Momberger"
+          photo: "bradley-momberger.jpeg"
+          bio: "Bradley worked with Brian and Justin at Cengage Learning. He's a fantastic developer who's amazing at finding Mustache bugs. Bradly is a CanJS enthusiast, using it as his main framework at Reciprocity Labs."
+      sponsor:
+        name: "Mindjet"
+        logo: "mindjet.jpeg"
+        description: "More than two million individuals, thousands of small businesses, and 83% of Fortune 100 companies use Mindjet to generate ideas, organize information, store and share data, and manage workflow, maximizing the power of collaboration."
     - name: "Seattle"
       site: "http://www.meetup.com/CanJS-Seattle/"
       logo: "seattle.jpeg"
