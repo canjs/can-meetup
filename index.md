@@ -21,7 +21,7 @@ At meetups, we&apos;ll go over how to build things and use certain features of C
 
 Check out the video and follow along as Justin explains how to build TodoMVC in CanJS. This covers topics like two-way binding and building an application using `can.Component`.
 
-<iframe width="100%" height="500" src="http://jsfiddle.net/jandjorgensen/EAFb5/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
+<iframe width="100%" height="500" src="http://jsfiddle.net/donejs/CRZXH/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
 
 <iframe width="100%" height="400" src="//www.youtube.com/embed/E9kEM9P0Lp8" frameborder="0"> </iframe>
 
@@ -29,7 +29,7 @@ Check out the video and follow along as Justin explains how to build TodoMVC in 
 
 Here&apos;s a preview of what&apos;s happening in upcoming meetups.  Through building an ATM, we demonstrate using `can.Map` and `can.List` to model application state.
 
-<iframe width="100%" height="500" src="http://jsfiddle.net/jandjorgensen/mhPq7/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
+<iframe width="100%" height="500" src="http://jsfiddle.net/donejs/3PZ8g/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
 
 ## Sponsors and Organizers
 {% for city in site.cities %}
