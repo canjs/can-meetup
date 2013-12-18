@@ -15,7 +15,7 @@ Here you can find a meetup near you as well as find videos and other materials f
 
 ## Meetup Content
 
-At meetups, we&#8217;ll go over how to build things and use certain features of CanJS.  Here&#8217;s what we&#8217;ve done in past meetups.
+At meetups, we&apos;ll go over how to build things and use certain features of CanJS.  Here&apos;s what we&apos;ve done in past meetups.
 
 ### Building TodoMVC
 
@@ -27,7 +27,7 @@ Check out the video and follow along as Justin explains how to build TodoMVC in 
 
 ### Map and List
 
-Here&#8217;s a preview of what&#8217;s happening in upcoming meetups.  Through building an ATM, we demonstrate using `can.Map` and `can.List` to model application state.
+Here&apos;s a preview of what&apos;s happening in upcoming meetups.  Through building an ATM, we demonstrate using `can.Map` and `can.List` to model application state.
 
 <iframe width="100%" height="500" src="http://jsfiddle.net/jandjorgensen/mhPq7/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
 
@@ -69,14 +69,14 @@ Here&#8217;s a preview of what&#8217;s happening in upcoming meetups.  Through b
 ## Get Involved
 
 ### For People
-If you&#8217;re in the area of one of these meetups, the first thing to do is to signup for meetup.com and attend the event. If you want to give a talk on something or help plan future meetups, contact the organizer on the meetup page. If you need starter material or have questions, feel free to reach out to us for assistance.
+If you&apos;re in the area of one of these meetups, the first thing to do is to signup for meetup.com and attend the event. If you want to give a talk on something or help plan future meetups, contact the organizer on the meetup page. If you need starter material or have questions, feel free to reach out to us for assistance.
 
-If you don&#8217;t live near one of these cities, create a new CanJS meetup! As long as you have an open-invite event, no matter how small, Bitovi will provide you montly workshop and training material. Once you get over 15 people coming to your meetup, someone from Bitovi will come out. If you are outside the US, we will also come out, but when we can schedule a few meetups at once in the general area.
+If you don&apos;t live near one of these cities, create a new CanJS meetup! As long as you have an open-invite event, no matter how small, Bitovi will provide you montly workshop and training material. Once you get over 15 people coming to your meetup, someone from Bitovi will come out. If you are outside the US, we will also come out, but when we can schedule a few meetups at once in the general area.
 
 ### For Organizations
-If you&#8217;re part of a company that&#8217;s using CanJS, you can sponsor the meetup by hosting the meetup or purchasing food and drink for attendees. Organizations can also start CanJS meetups.
+If you&apos;re part of a company that&apos;s using CanJS, you can sponsor the meetup by hosting the meetup or purchasing food and drink for attendees. Organizations can also start CanJS meetups.
 
-Sponsor organizations get Bitovi&#8217;s training and lecture material and their logo listed on the meetup page.
+Sponsor organizations get Bitovi&apos;s training and lecture material and their logo listed on the meetup page.
 
 ### Contact Us
 
