@@ -9,7 +9,7 @@ Here you can find a meetup near you as well as find videos and other materials f
 
 ## Cities
 {% for city in site.cities %}
-- [{{ city.name }}](#sponsors_and_organizers-{{city.name | replace:' ','_' | replace:',','_' | replace:'-','_' | replace:'.','_' | downcase}}) [>>]({{city.site}}){% endfor %}
+- [{{ city.name }}](#sponsors_and_organizers-{{city.name | replace:' ','_' | replace:',','_' | replace:'-','_' | replace:'.','_' | downcase}}) [&gt;&gt;]({{city.site}}){% endfor %}
 
 
 
