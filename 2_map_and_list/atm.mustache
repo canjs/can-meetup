@@ -1,21 +1,24 @@
-<div class="title"><h1>canATM</h1></div>
+<div class="title">
+	<h1>canATM</h1>
+</div>
 
 <div class="screen">
 	<div class="screen-content">
 		<div class="screen-glass">
 		
-{{#isReadingCard}}
+{{#isState "readingCard"}}
 	<h2>Reading Card</h2>
 	<p>Welcome to canATM where there are <strong>never</strong>
 	  fees!</p>
 	</p>
 	<p>
 		Enter Card Number: 
-		<input name="card" can-blur="addCardNumber" can-enter="addCardNumber"/>
+		<input name="card" 	can-blur="addCardNumber" 
+							can-enter="addCardNumber"/>
 	</p>
-{{/isReadingCard}}
+{{/isState}}
 
-{{#isReadingPin}}
+{{#isState "readingPin"}}
 	<h2>Reading Pin</h2>
 	<p>
 		Enter Pin Number: 
@@ -34,9 +37,9 @@
 		{{/isVerifyingPin}}
 	</p>
 	<a href="javascript://" can-click="exit">exit</a>
-{{/isReadingPin}}
+{{/isState}}
 
-{{#isChoosingTransaction}}
+{{#isState "choosingTransaction"}}
 	<h2>Choose Transaction</h2>
 	<p>What would you like to do?</p>
 	<nav>
@@ -46,9 +49,9 @@
 			<li can-click="printReceiptAndExit">Exit</li>
 		</ul>
 	</nav>
-{{/isChoosingTransaction}}
+{{/isState}}
 
-{{#isPickingAccount}}
+{{#isState "pickingAccount"}}
 	<h2>Pick Account</h2>
 	<p>Please pick your account:</p>
 	<ul>
@@ -56,57 +59,67 @@
 			<li can-click="chooseAccount">{{name}} - ${{balance}}</li>
 		{{/each}}
 	</ul>
-{{/isPickingAccount}}
+{{/isState}}
 
-{{#isDepositInfo}}
+{{#isState "depositInfo"}}
 	<h2>Deposit</h2>
 	<p>
 		How much would you like to deposit 
-		into {{currentTransaction.account.name}} (${{currentTransaction.account.balance}})?
+		into {{currentTransaction.account.name}} 
+		(${{currentTransaction.account.balance}})?
 		
 		<input name="deposit" can-value="currentTransaction.amount"/>
 	</p>
 	
 	{{#if isTransactionExecuting}}
 		<div class='warn'>
-				<p>
-				<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
-				executing 
-				</p>
-  			</div>
+			<p>
+			<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
+			executing 
+			</p>
+		</div>
 	{{else}}
 		<button can-click="currentTransaction.execute"
-			{{^isTransactionReady}}DISABLED{{/isTransactionReady}}>Deposit</button>
+			{{^isTransactionReady}}DISABLED{{/isTransactionReady}}>
+			Deposit
+		</button>
 		<a href="javascript://" can-click="removeTransaction">cancel</a>
 	{{/if}}
 	
 	
-{{/isDepositInfo}}
+{{/isState}}
 
-{{#isWithdrawalInfo}}
+{{#isState "withdrawalInfo"}}
 	<h2>Withdraw</h2>
 	<p>
 		How much would you like to withdraw  
-		from {{currentTransaction.account.name}} (${{currentTransaction.account.balance}})?
+		from {{currentTransaction.account.name}} 
+		(${{currentTransaction.account.balance}})?
+		
 		<input name="withdrawl" can-value="currentTransaction.amount"/>
 	</p>
 	{{#if isTransactionExecuting}}
 		<div class='warn'>
-				<p>
-				<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
-				executing 
-				</p>
-  			</div>
+			<p>
+			<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
+			executing 
+			</p>
+		</div>
 	{{else}}
 		<button can-click="currentTransaction.execute"
-					{{^isTransactionReady}}DISABLED{{/isTransactionReady}}>Withdraw</button>
+			{{^isTransactionReady}}DISABLED{{/isTransactionReady}}>
+			Withdraw
+		</button>
 		<a href="javascript://" can-click="removeTransaction">cancel</a>
 	{{/if}}
-{{/isWithdrawalInfo}}
+{{/isState}}
 
-{{#isTransactionSuccessful}}
+{{#isState "transactionSuccessful"}}
 	<h2>Transaction Successful!</h2>
-	<p>{{currentTransaction.account.name}} has ${{currentTransaction.account.balance}}.</p>
+	<p>
+		{{currentTransaction.account.name}} has 
+		${{currentTransaction.account.balance}}.
+	</p>
 	<p>What would you like to do?</p>
 	<nav>
 		<ul>
@@ -114,9 +127,9 @@
 			<li can-click="printReceiptAndExit">Exit</li>
 		</ul>
 	</nav>
-{{/isTransactionSuccessful}}
+{{/isState}}
 
-{{#isPrintingReceipt}}
+{{#isState "printingReceipt"}}
 	<h2>Printing Receipt</h2>
 	<h3>Transactions</h3>
 	<ul>
@@ -135,12 +148,12 @@
 		{{/each}}
 	</ul>
 	<div class='warn'>
-				<p>
-				<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
-				printing 
-				</p>
-  			</div>
-{{/isExiting}}
+		<p>
+			<img src="http://bithub.com/assets/images/ajax-loader-sm-blue.gif"/> 
+			printing 
+		</p>
+	</div>
+{{/isState}}
 
 
 		</div>

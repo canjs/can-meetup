@@ -1,27 +1,52 @@
 <link rel="stylesheet" type="text/css" href="base.css"/>
-<script type='text/mustache' id='todos-app'>
-<todos-app>
 <section id="todoapp">
 	<header id="header">
 		<h1>todos</h1>
-		<todos-create></todos-create>
+		<input id="new-todo" placeholder="What needs to be done?" autofocus="">
 	</header>
 	<section id="main" class="">
 		<input id="toggle-all" type="checkbox">
 		<label for="toggle-all">Mark all as complete</label>
-		<todos-list todos="todosToShow"></todos-list>
+		<ul id="todo-list">
+			<li class="todo">
+				<div class="view">
+					<input class="toggle" type="checkbox">
+					<label>Do the dishes</label>
+					<button class="destroy"></button>
+				</div>
+				<input class="edit" type="text" value="Do the dishes">
+			</li>
+			<li class="todo completed">
+				<div class="view">
+					<input class="toggle" type="checkbox">
+					<label>Mow the lawn</label>
+					<button class="destroy"></button>
+				</div>
+				<input class="edit" type="text" value="Mow the lawn">
+			</li>
+			<li class="todo editing">
+				<div class="view">
+					<input class="toggle" type="checkbox">
+					<label>Pick up dry cleaning</label>
+					<button class="destroy"></button>
+				</div>
+				<input class="edit" type="text" value="Pick up dry cleaning">
+			</li>
+		</ul>
 	</section>
 	<footer id="footer" class="">
 		<span id="todo-count">
-			<strong>{{todos.activeCount}}</strong> items left
+			<strong>2</strong> items left
 		</span>
 		<ul id="filters">
-			<li>{{{filterLink "All" undefined}}}</li>
 			<li>
-				{{{filterLink "Active" "active"}}}
+				<a class="selected" href="#!">All</a>
 			</li>
 			<li>
-				{{{filterLink "Completed" "completed"}}}
+				<a href="#!active">Active</a>
+			</li>
+			<li>
+				<a href="#!completed">Completed</a>
 			</li>
 		</ul>
 		<button id="clear-completed">
@@ -29,173 +54,12 @@
 		</button>
 	</footer>
 </section>
-</todos-app>
-</script>
-<script type='text/mustache' id='todos-list-template'>
-<ul id="todo-list">
-	{{#todos}}
-	<li class="todo {{#completed}}completed{{/completed}} {{#editing}}editing{{/editing}}">
-		<div class="view">
-			<input class="toggle" type="checkbox" can-value="completed">
-			<label can-click="editTodo">{{name}}</label>
-			<button class="destroy" can-click="destroy"></button>
-		</div>
-		<input class="edit" type="text" value="{{name}}"
-				can-blur="updateTodo"/>
-	</li>
-	{{/todos}}
-</ul>
-</script>
 <div id='app'></div>
 <script src='jquery.1.9.1.js'></script>
 <script src='can.jquery.js'></script>
 <script src='can.object.js'></script>
 <script src='can.fixture.js'></script>
 <script>
-
-can.Component.extend({
-	tag: "todos-create",
-	template: '<input id="new-todo" placeholder="What needs to be done?" '+
-				'can-enter="createTodo"'+
-				' autofocus="">',
-	scope: {
-		createTodo: function(todosCreateScope, el){
-			new Todo({
-				completed: false,
-				name: el.val()
-			}).save();
-			
-			el.val("")
-		}
-	}
-})
-
-can.Component.extend({
-	tag: "todos-list",
-	template: can.view("todos-list-template"),
-	scope: {
-		editTodo: function(todo){
-			todo.attr('editing', true)
-		},
-		updateTodo: function(todo, el, ev){
-			todo.attr({
-				editing: false,
-				name:  el.val()
-			})
-		}
-	}
-})
-
-can.fixture({
-	"GET /services/todos": function(){
-		console.log("got items")
-		return [
-			{name: "Mow the lawn", completed: true},
-			{name: "Do the dishes", completed: false},
-			{name: "Learn CanJS", completed: false}
-		]
-	},
-	"POST /services/todos": function(request){
-		console.log("creating a todo", request.data)
-		return {id: Math.random()}
-	},
-	"DELETE /services/todos/{id}": function(){
-		return {};
-	}
-});
-
-
-Todo = can.Model.extend({
-	findAll: "GET /services/todos",
-	create: "POST /services/todos",
-	destroy : "DELETE /services/todos/{id}"
-},{})
-
-Todo.List = Todo.List.extend({
-	active: function(){
-		return this.filter(function(todo){
-			return !todo.attr('completed')
-		})
-	},
-	completed: function(){
-		return this.filter(function(todo){
-			return todo.attr('completed')
-		})
-	},
-	activeCount: function(){
-		return this.active().attr('length')
-	},
-	filter: function(check){
-		var items = new Todo.List();
-		this.each(function(todo){
-			if(check(todo)){
-				items.push(todo);
-			}
-		})
-		return items;
-	}
-})
-
-
-can.Component.extend({
-	tag: "todos-app",
-	scope: {
-		todos: new Todo.List({}),
-		todosToShow: function(){
-			var todos = this.attr('todos'),
-				filter = can.route.attr('filter');
-				
-			if(filter === "active"){
-				return todos.active()
-			} else if(filter === "completed") {
-				return todos.completed()
-			} else {
-				return todos;
-			}
-		}
-	},
-	helpers : {
-		filterLink : function(text, filterValue){
-			var params = {};
-			if(filterValue){
-				params.filter = filterValue
-			}
-			
-			return can.route.link(text,params,{
-				className: can.route.attr('filter') == filterValue ? "selected" : ""
-			})
-		}
-	},
-	events: {
-		"{Todo} created" : function(Todo, ev, newTodo){
-			this.scope.attr('todosToShow').unshift(newTodo)
-		}
-	}
-})
-
-can.route(":filter")
-
-can.route.ready();
-
-$("#app").html( can.view("todos-app",{}) );
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>
