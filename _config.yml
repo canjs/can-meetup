@@ -99,7 +99,7 @@ cities:
     - name: "Silicon Valley"
       site: "http://www.meetup.com/CanJS-Silicon-Valley"
       sponsor:
-        name: "BrightTRoll"
+        name: "BrightRoll"
         logo: "brightroll.jpg"
         description: "BrightRoll is the largest independent video advertising platform for reaching audiences across web, mobile and connected TV. BrightRoll powers digital video advertising for the world’s largest brands, it reaches 4 in 5 online video viewers and serves more video ads than any other company thus collecting and analyzing hundreds of billions of data points a month and enabling real-time decisions that drive ROI for advertisers."
     - name: "Zagreb, Croatia"
