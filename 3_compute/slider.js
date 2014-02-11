@@ -33,7 +33,7 @@ Slider = can.Control.extend(
         	rounded = Math.round(value*100) / 100;
         
         if(this.options.orientation === "vertical") {
-        	round = 1 - rounded;
+        		rounded = 1 - rounded;
         }
         this.options.value( rounded )
         

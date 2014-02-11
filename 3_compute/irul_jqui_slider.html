@@ -65,40 +65,40 @@
   
   <script src="glass.js"></script>
   <script>
-    var Numeric = can.Control.extend({
-    	init: function(){
-    		this.element.html(can.view('numeric-template',this.options))
-    	},
-    	"button.num click": function(el){
-    		var input = this.element.find("input")
-    		input.val( input.val() + el.html() );
-    	},
-    	"button.clear click": function(){
-    		 this.element.find("input").val("")
-    	},
-    	"button.enter click": function(){
-    		 this.options.value( +this.element.find("input").val() )
-    	}
-    });
+	var Numeric = can.Control.extend({
+		init: function(){
+			this.element.html(can.view('numeric-template',this.options))
+		},
+		"button.num click": function(el){
+			var input = this.element.find("input")
+				input.val( input.val() + el.html() );
+		},
+		"button.clear click": function(){
+			this.element.find("input").val("")
+		},
+		"button.enter click": function(){
+			this.options.value( +this.element.find("input").val() )
+		}
+	});
     
     var glass = new can.Map({
-    	fullRatio: 0.5
+    		fullRatio: 0.5
     })
     
     var fullPercent = can.compute(function(newValue){
-    	if(arguments.length) {
-    		glass.attr('fullRatio', newValue / 100) ;
-    	} else {
-    		return glass.attr("fullRatio") * 100
-    	}
+	    	if(arguments.length) {
+	    		glass.attr('fullRatio', newValue / 100) ;
+	    	} else {
+	    		return glass.attr("fullRatio") * 100
+	    	}
     });
     
     new Numeric("#numeric",{
-    	value: fullPercent
+    		value: fullPercent
     });
     
     new Glass("#glass",{
-    	value: glass.compute('fullRatio')
+    		value: glass.compute('fullRatio')
 	});
     
     can.view.live.html( $("#val")[0], glass.compute('fullRatio'));
@@ -106,16 +106,16 @@
     
     
     $( "#slider" ).slider({
-    	value: fullPercent(),  
-    	orientation: "vertical" 
+	    	value: fullPercent(),  
+	    	orientation: "vertical" 
 	});
     
     fullPercent.bind("change", function(ev, newValue){
-    	$("#slider").slider("value", newValue);
+    		$("#slider").slider("value", newValue);
     });
     
     $("#slider").on("slide slidechange",function(){
-    	fullPercent( $("#slider").slider("value") );
+    		fullPercent( $("#slider").slider("value") );
     });
     
   </script>
