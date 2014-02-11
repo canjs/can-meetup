@@ -1,0 +1,64 @@
+<html>
+<head>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+</head>
+<body>
+  <div id="app"></div>
+  
+  <script type="text/mustache" id='app-template'>
+    <h2>I understand {{completedModules}} CanJS {{plural "Module" completedModules}}.</h2>
+    <ul>
+    	{{#each modules}}
+    	 <li {{#completed}}class='text-success'{{/completed}}>
+    	 	<input type='checkbox' can-value='completed'/>
+    	 	<span>{{name}}</span>
+    	 </li>
+    	{{/each}}
+    </ul>
+  </script>
+ 
+  <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+  <script src="http://canjs.com/release/2.0.5/can.jquery.js"></script>
+  <script>
+  
+ 	can.Mustache.registerHelper("plural", function(name, count){
+  		if( typeof count === "function" ) {
+  			count = count();
+  		}
+  		return count != 1 ? name+"s" : name;
+  	});
+  
+  	var modules = new can.List([
+  		{completed: true, name: "can.Map"},
+  		{completed: true, name: "can.List"},
+  		{completed: true, name: "can.compute"},
+  		{completed: false, name: "can.Mustache"},
+  		{completed: false, name: "can.Component"},
+  		{completed: false, name: "can.Model"},
+  		{completed: false, name: "can.Construct"},
+  		{completed: false, name: "can.Control"}
+  	]);
+  	
+  	var completedModules = can.compute(function(){
+  		var completed = 0;
+  		modules.each(function(mod){
+  			if( mod.attr('completed') ) {
+  				completed += 1
+  			}
+  		});
+  		return completed;
+  	});
+  	
+
+  	
+  	var frag = can.view("app-template",{
+  		modules: modules,
+  		completedModules: completedModules
+  	});
+
+  	
+  	$("#app").html( frag );
+  	  	
+  </script>
+</body>
+</html>

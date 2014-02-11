@@ -1,0 +1,54 @@
+<html>
+<head>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	<style>
+		body {margin: 10px;}
+	</style>
+</head>
+<body>
+  <div id="app"></div>
+  
+  <script type="text/mustache" id='app-template'>
+  	<form class='form-inline'>
+  		<label>First:</label>
+  		<input type="text" can-value="me.first" placeholder="first name" class='form-control'/>
+  		
+  		<label>Last:</label>
+  	 	<input type="text" can-value="me.last" placeholder="last name" class='form-control'/><br/><br/>
+  	 	<label>Full Name:</label>
+  	 	<input type="text" can-value="fullName" placeholder="fullName" class='form-control'/>
+  	</form>
+  </script>
+ 
+  <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+  <script src="http://canjs.com/release/2.0.5/can.jquery.js"></script>
+  
+  <script src="glass.js"></script>
+  <script src="slider.js"></script>
+  <script>
+	
+	var me  = new can.Map({first: "Andy", last: "Kant"})
+
+	var fullName = can.compute(function(newVal){
+		if(arguments.length) {
+			var parts = newVal.split(" ");
+			me.attr({ 
+				first: parts[0], 
+				last:parts[1] 
+			});
+	
+		} else {
+			return me.attr("first") +" "+ me.attr("last");
+		}
+	})
+		
+	var frag = can.view("app-template",{
+		me: me,
+		fullName: fullName
+	})
+	
+	$("#app").html(frag)
+
+  </script>
+</body>
+</html>

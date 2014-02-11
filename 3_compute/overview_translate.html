@@ -1,0 +1,102 @@
+<html>
+<head>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	<style>
+		button {
+			width: 40px;
+			height: 40px;
+			margin-bottom: 3px;
+		}
+		input {
+			margin-bottom: 3px;
+			text-align: right;
+		}
+		input:placeholder {  text-align: left; }
+		input::-moz-placeholder {  text-align: left; }
+		input::-webkit-input-placeholder {  text-align: left; }
+		#numeric {
+			width: 128px;
+			margin: 10px 10px 10px 0px;
+			float: left;
+		}
+		body {
+			margin: 8px;
+		}
+	</style>
+</head>
+<body>
+  <div id="app">
+  	
+  	<p>The glass is <kbd><span id="val"></span></kbd> full.</p>
+  	
+  	<canvas id="glass"  width="255" height="255"></canvas>
+  	
+  	<div id='numeric'></div>
+  	
+  </div>
+  <script type="text/mustache" id='numeric-template'>
+  	<form class='form-group'>
+  	  <input class="form-control" placeholder='Enter Value' disabled value="{{value}}"/>
+      <button type="button" class="btn btn-default num">1</button>
+      <button type="button" class="btn btn-default num">2</button>
+      <button type="button" class="btn btn-default num">3</button>
+      <button type="button" class="btn btn-default num">4</button>
+      <button type="button" class="btn btn-default num">5</button>
+      <button type="button" class="btn btn-default num">6</button>
+      <button type="button" class="btn btn-default num">7</button>
+      <button type="button" class="btn btn-default num">8</button>
+      <button type="button" class="btn btn-default num">9</button>
+      <button type="button" class="btn btn-default clear">
+    	<span class='glyphicon glyphicon-remove'></span>
+	  </button>
+	<button type="button" class="btn btn-default num">0</button>
+	<button type="button" class="btn btn-default enter">
+    	<span class='glyphicon glyphicon-ok'></span>
+	</button>
+	</form>
+  </script>
+ 
+  <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+  <script src="http://canjs.com/release/2.0.5/can.jquery.js"></script>
+  <script src="glass.js"></script>
+  <script>
+    var Numeric = can.Control.extend({
+    	init: function(){
+    		this.element.html(can.view('numeric-template',this.options))
+    	},
+    	"button.num click": function(el){
+    		var input = this.element.find("input")
+    		input.val( input.val() + el.html() );
+    	},
+    	"button.clear click": function(){
+    		 this.element.find("input").val("")
+    	},
+    	"button.enter click": function(){
+    		 this.options.value( +this.element.find("input").val() )
+    	}
+    });
+    
+    var glass = new can.Map({
+    	fullnessRatio: 0.5
+    })
+    
+    var fullnessPercent = can.compute(function(newValue){
+    	if(arguments.length) {
+    		glass.attr('fullnessRatio', newValue / 100)
+    	} else {
+    		return glass.attr("fullnessRatio") * 100
+    	}
+    });
+    
+    new Numeric("#numeric",{
+    	value: fullnessPercent
+    });
+    
+    new Glass("#glass",{
+    	value: glass.compute('fullnessRatio')
+	});
+    
+    can.view.live.html( $("#val")[0], glass.compute('fullnessRatio'))
+  </script>
+</body>
+</html>

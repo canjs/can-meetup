@@ -1,0 +1,51 @@
+<html>
+<head>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+</head>
+<body>
+  <div id="app"></div>
+  
+  <script type="text/mustache" id='app-template'>
+    <h2>There are {{modules.length}} CanJS 
+    	{{plural "Module" modules.length}}.</h2>
+    <ul>
+    	{{#each modules}}
+    	 <li {{#completed}}class='text-success'{{/completed}}>
+    	 	<span class='glyphicon glyphicon-remove' can-click="remove"></span>
+    	 	<span>{{name}}</span>
+    	 </li>
+    	{{/each}}
+    </ul>
+  </script>
+ 
+  <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+  <script src="http://canjs.com/release/2.0.5/can.jquery.js"></script>
+  <script>
+  
+ 	can.Mustache.registerHelper("plural", function(name, count){
+  		if( typeof count === "function" ) {
+  			count = count();
+  		}
+  		return count != 1 ? name+"s" : name;
+  	});
+  
+  	var modules = new can.List([
+  		{completed: true, name: "can.Map"},
+  		{completed: true, name: "can.List"},
+  		{completed: true, name: "can.compute"}
+  	]);
+  	
+  	
+  	var frag = can.view("app-template",{
+  		modules: modules,
+  		remove: function(mod){
+  			modules.splice(modules.indexOf(mod),1);
+  		}
+  	});
+
+  	
+  	$("#app").html( frag );
+  	  	
+  </script>
+</body>
+</html>

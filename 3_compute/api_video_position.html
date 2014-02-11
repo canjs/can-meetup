@@ -1,0 +1,88 @@
+<html>
+<head>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	<style>
+		#slider-container {
+			width: 425px;
+		}
+		body {
+			margin: 8px;
+		}
+	</style>
+</head>
+<body>
+
+  <video width=425 height=240 id="trailer" preload>
+	<source id="mp4" src="http://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4">
+    <source id="webm" src="http://media.w3.org/2010/05/sintel/trailer.webm" type="video/webm">
+    <source id="ogv" src="http://media.w3.org/2010/05/sintel/trailer.ogv" type="video/ogg">
+  </video>
+  <div id="play-button"></div>
+  <div id="slider-container" class='ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all'>
+    <div id="slider" class='ui-slider-handle ui-state-default ui-corner-all'></div>
+  </div>
+  
+  <script type="text/mustache" id="play-template">
+  	{{#if playing}}
+  		<button can-click="pause">Pause</button>
+	{{else}}
+		<button can-click="play">Play</button>
+	{{/if}}
+  </script>
+  <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+  <script src="http://jquerypp.com/release/latest/jquerypp.js"></script>
+  <script src="http://canjs.com/release/minor/can.jquery.js"></script>
+  <script src="slider.js"></script>
+  <script>
+    
+    var video = document.getElementById("trailer"),
+    	time = can.compute(video,"currentTime","timeupdate"),
+    	duration = can.compute(video,"duration","durationchange");
+    
+	var progress = can.compute(function(newPercent){
+	    // can only do anything if duration is ready
+	    var durationValue = duration();
+	    if(typeof durationValue == "number" && !isNaN(durationValue)){
+	        if(arguments.length){
+	            time(newPercent * durationValue)
+	        } else {
+	            return time() / durationValue;
+	        }
+	    }
+	});
+	
+	new Slider("#slider",{
+	    value: progress
+	});
+    
+    var playing = can.compute(!video.paused,{
+		get: function(){
+			return !video.paused
+		},
+		set: function(newValue){
+			newValue ? video.play() : video.pause()
+		},
+		on: function(updated){
+			video.addEventListener("play", updated, false);
+			video.addEventListener("pause", updated, false)
+		},
+		off: function(){
+			video.addEventListener("pause", updated, false);
+		}
+	});
+    
+    var frag = can.view("play-template",{
+    	playing: playing,
+    	pause: function(){
+    		playing(false);
+    	},
+    	play: function(){
+    		playing(true);
+    	}
+    });
+    $("#play-button").html(frag);
+    
+  </script>
+</body>
+</html>

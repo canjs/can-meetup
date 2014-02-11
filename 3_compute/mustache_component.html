@@ -1,0 +1,81 @@
+<html>
+<head>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	<style>
+		body {margin: 10px;}
+	</style>
+</head>
+<body>
+  <div id="app"></div>
+  
+  <script type="text/mustache" id='app-template'>
+    <my-app>
+    	<p>Show 
+    	   <select can-value="type">
+    		<option value="all">All</option>
+    		<option value="complete">Complete</option>
+    		<option value="incomplete">Incomplete</option>
+    	   </select> 
+    	   Modules.
+    	</p>
+    	<my-list items="selectedModules"></my-list>
+    </my-app>
+  </script>
+  <script type='text/mustache' id='my-list-template'>
+    <ul>
+    	{{#items}}
+    	 <li {{#completed}}class='text-success'{{/completed}}>
+    	 	<input type='checkbox' can-value='completed'/>
+    	 	<span>{{name}}</span>
+    	 </li>
+    	{{/items}}
+    </ul>
+  </script>
+ 
+  <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+  <script src="http://canjs.com/release/2.0.5/can.jquery.js"></script>
+  <script>
+    can.Component.extend({
+    	tag: "my-app",
+    	scope: {
+    		modules: new can.List([
+		  		{completed: true, name: "can.Map"},
+		  		{completed: true, name: "can.List"},
+		  		{completed: true, name: "can.compute"},
+		  		{completed: false, name: "can.Mustache"},
+		  		{completed: false, name: "can.Component"},
+		  		{completed: false, name: "can.Model"},
+		  		{completed: false, name: "can.Construct"},
+		  		{completed: false, name: "can.Control"}
+		  	]),
+		  	type: "all",
+		  	selectedModules: function(){
+		  		var list = new can.List(),
+		  			type = this.attr("type");
+		  			
+		  		this.attr("modules").each(function(mod){
+		  			if(type == "all" || 
+		  			   ( type == "complete" && mod.attr("completed")) ||
+		  			   ( type == "incomplete" && !mod.attr("completed")) ) {
+		  			   	list.push(mod)
+		  			}
+		  		});
+		  		
+		  		return list;
+		  	}
+    	}
+    });
+	
+	can.Component.extend({
+		tag: "my-list",
+		template: can.view("my-list-template")
+	})
+
+  	
+  	var frag = can.view("app-template",{});
+  	
+  	$("#app").html( frag );
+  	  	
+  </script>
+</body>
+</html>
