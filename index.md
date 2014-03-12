@@ -31,6 +31,8 @@ Here&apos;s a preview of what&apos;s happening in upcoming meetups.  Through bui
 
 <iframe width="100%" height="500" src="http://jsfiddle.net/donejs/3PZ8g/embedded/{{"result,js,html,css"}}/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
 
+<iframe width="100%" height="400" src="//www.youtube.com/embed/QP9mHyxZNiI" frameborder="0"> </iframe>
+
 ## Sponsors and Organizers
 {% for city in site.cities %}
 ###[{{city.name}}]({{city.site}})
