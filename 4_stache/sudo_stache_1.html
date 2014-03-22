@@ -1,0 +1,73 @@
+<body>
+<script src="jquery.1.10.2.js"></script>
+<script src="can.jquery.js"></script>
+<script src="can.stache.js"></script>
+<script>
+	
+	function sudoStache(template){
+		
+		var targetData = [],
+			stack = [],
+			top = function(){
+				return stack[stack.length - 1];
+			},
+			push = function(nodeData){
+				add(nodeData);
+				stack.push(nodeData);
+			},
+			pop = function(){
+				stack.pop()
+			},
+			add = function(data){
+				if(stack.length){
+					top().children.push(data)
+				} else {
+					targetData.push(data);
+				}
+			},
+			curAttrName;
+		
+		can.view.parser(template, {
+			start: function(tagName){
+				push({
+					tag: tagName, 
+					attrs: {},
+					children: []
+				});
+			},
+			close: function(){
+				pop();
+			},
+			attrStart: function(attrName){
+				top().attrs[curAttrName = attrName] = ""
+			},
+			attrEnd: can.k,
+			attrValue: function(attrValue){
+				top().attrs[curAttrName] += attrValue;
+			},
+			chars: function(chars){
+				add(chars)
+			},
+			special: function(expression){
+				add(function(data){
+					this.nodeValue = data[expression]
+				});
+			},
+			end: can.k,
+			comment: can.k,
+			done: can.k
+		})
+		
+		var target = can.view.target(targetData);
+		
+		return function renderer(){
+			return target.hydrate.apply(target, arguments);
+		};
+	};
+	
+	var renderer = sudoStache("<h1 class='title'>Hello {{name}}!</h1>");
+	
+	document.body.appendChild( renderer({name: "Holler"}) );
+	
+</script>
+</body>

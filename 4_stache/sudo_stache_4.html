@@ -1,0 +1,88 @@
+<body>
+<script src="jquery.1.10.2.js"></script>
+<script src="can.jquery.js"></script>
+<script src="can.stache.js"></script>
+<script>
+	
+	function sudoStache(template){
+		
+		var targetData = [],
+			stack = [],
+			top = function(){
+				return stack[stack.length - 1];
+			},
+			push = function(nodeData){
+				add(nodeData);
+				stack.push(nodeData);
+			},
+			pop = function(){
+				stack.pop()
+			},
+			add = function(data){
+				if(stack.length){
+					top().children.push(data)
+				} else {
+					targetData.push(data);
+				}
+			},
+			curAttrName;
+		
+		can.view.parser(template, {
+			start: function(tagName){
+				push({
+					tag: tagName, 
+					attrs: {},
+					children: []
+				});
+			},
+			close: function(){
+				pop();
+			},
+			attrStart: function(attrName){
+				top().attrs[curAttrName = attrName] = ""
+			},
+			attrEnd: can.k,
+			attrValue: function(attrValue){
+				top().attrs[curAttrName] += attrValue;
+			},
+			chars: function(chars){
+				add(chars)
+			},
+			special: function(expression){
+				add(function(scope){
+					var compute = scope.compute(expression);
+					can.view.live.text(this, compute);
+				});
+			},
+			end: can.k,
+			comment: can.k,
+			done: can.k
+		})
+		
+		var target = can.view.target(targetData);
+		
+		return function renderer(){
+			return target.hydrate.apply(target, arguments);
+		};
+	};
+	
+	var renderer = sudoStache("<h1 class='title'>{{greeting}} {{name}}!</h1>");
+	
+	var data = new can.Map({
+		greeting: "Howdy",
+		person: {name: "stranger"}
+	});
+	
+	var baseScope = new can.view.Scope( data ),
+		topScope = new can.view.Scope(data.attr("person"), baseScope);
+	
+	document.body.appendChild( renderer( topScope ) );
+	
+	setTimeout(function(){
+		data.attr("greeting","Hello")
+		data.attr("person").attr("name","friend");
+	},1000);
+
+
+</script>
+</body>
