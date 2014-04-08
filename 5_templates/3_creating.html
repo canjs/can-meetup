@@ -1,0 +1,26 @@
+<body>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+	<script src="http://canjs.com/release/minor/can.jquery.js"></script>
+	<script type='text/mustache' id='hello-template'>
+		<h1>{{message}}</h1>
+	</script>
+	<script>
+		
+		
+	var renderer1 = can.mustache("<h1>{{message}}</h1>"),
+		renderer2 = can.view("hello-template"),
+		renderer3 =  can.view("hello.mustache");
+	
+	var data = new can.Map({message: "Hello World"});
+	
+	document.body.appendChild( renderer1(data) );
+	document.body.appendChild( renderer2(data) );
+	document.body.appendChild( renderer3(data) );
+	
+	setTimeout(function(){
+		data.attr("message","Goodbye Earth");
+	},1000);
+	
+	</script>
+</body>
+

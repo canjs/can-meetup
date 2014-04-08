@@ -1,0 +1,15 @@
+<body>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+	<script src="http://canjs.com/release/minor/can.jquery.js"></script>
+	<script>
+		
+	var template = can.view.mustache("<h1>{{message}}</h1>");
+	
+	var frag = template({message: "Hello World"});
+	
+	frag //-> <h1>Hello World</h1>
+	
+	document.body.appendChild(frag);
+	
+	</script>
+</body>

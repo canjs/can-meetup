@@ -1,0 +1,70 @@
+<body>
+<ul> <li>dishes</li> ... </ul>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+	<script src="http://canjs.com/release/minor/can.jquery.js"></script>
+	<script type='text/mustache' id='hello-template'>
+<ul>
+  {{#todos}}
+    <li {{data "todo"}}>{{name}}</li>
+  {{/todos}}
+</ul>
+
+<p>{{#name}}{{first}} {{last}}{{/name}}</p>
+
+	</script>
+	<script>
+		
+		
+	var renderer1 = can.mustache("<h1>{{message}}</h1>"),
+		renderer2 = can.view("hello-template"),
+		renderer3 =  can.view("hello.mustache");
+	
+	var data = new can.Map({message: "Hello World"});
+	
+	document.body.appendChild( renderer1(data) );
+	document.body.appendChild( renderer2(data) );
+	document.body.appendChild( renderer3(data) );
+	
+	setTimeout(function(){
+		data.attr("message","Goodbye Earth");
+	},1000);
+	
+	var renderer = can.mustache("<h1>{{>title}}</h1>")
+	
+	var frag = renderer(
+		{message: "Hello"},
+		{
+			partials: {
+				title: can.mustache("<blink>{{message}}</blink>")
+			}
+		});
+	
+	frag //-> <h1><blink>Hello</blink></h1>
+
+	a = {items: {name: "Bitovi", year: 2006}};
+	
+	
+	var r = can.mustache("<h1>")
+	
+var o = {
+	name: {first: "Justin", last: "Meyer"},
+	siblings: ["Kim", "Logan", "Jack"]
+};
+	
+	$("li").data("todo").name //-> "dishes"
+	
+	
+	can.stache.registerHelper("cap", function(arg){
+		return cap.toUpperCase();
+	});
+	
+	var renderer = can.stache("<h1>{{cap message}}</h1>");
+	
+	var frag renderer({message: "Hi"})
+	
+	
+	
+	</script>
+</body>
+

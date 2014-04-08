@@ -1,0 +1,17 @@
+<body>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+	<script src="http://canjs.com/release/minor/can.jquery.js"></script>
+	<script>
+		
+	var template = can.view.mustache("<h1>{{message}}</h1>");
+	
+	var data = new can.Map({message: "Hello World"})
+	
+	document.body.appendChild( template(data) );
+	
+	setTimeout(function(){
+		data.attr("message","Goodbye Earth");
+	},1000);
+	
+	</script>
+</body>
