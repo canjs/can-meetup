@@ -1,0 +1,30 @@
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/stache">
+	<hello-world>Partner</hello-world>
+</script>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.stache.js"></script>
+<script id="demo-source">
+
+
+can.Component.extend({
+  tag: "hello-world",
+  template: can.stache("{{#if visible}}<b>{{message}}</b> <content>Stranger</content>!{{else}}<i>Click me</i>{{/if}}"),
+  scope: {
+    visible: false,
+    message: "Howdy"
+  },
+  events: {
+    click: function(){
+    	this.scope.attr("visible", true)
+    }
+  }
+});
+
+$("#out").html( can.view("app",{}) );
+
+</script>
+

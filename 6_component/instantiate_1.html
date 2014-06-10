@@ -1,0 +1,33 @@
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/stache">
+	<hello-world subject="{data.name}"></hello-world>
+</script>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.stache.js"></script>
+<script id="demo-source">
+
+can.Component.extend({
+	tag: "hello-world",
+	template: can.stache("<h1>Hello {{subject}}!</h1>")
+});
+
+
+var data = new can.Map({
+	name: "Robot Overloads"
+});
+
+$("#out").html( can.view("app",{
+	data: data
+}) );
+
+setTimeout(function(){
+	
+	data.attr("name","Ape Masters");
+	
+},2000);
+
+</script>
+

@@ -1,0 +1,27 @@
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/stache">
+	<hello-world subject="World"></hello-world>
+</script>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.stache.js"></script>
+<script id="demo-source">
+
+can.Component.extend({
+	tag: "hello-world",
+	template: can.stache("<h1>Hello {{subject}}!</h1>")
+});
+
+
+$("#out").html( can.view("app",{}) );
+
+setTimeout(function(){
+	
+	$("hello-world").attr("subject","Planet Earth");
+	
+},2000);
+
+</script>
+

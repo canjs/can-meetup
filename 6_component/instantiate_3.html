@@ -1,0 +1,64 @@
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/stache">
+	
+	<my-app>
+		<drivers selected="{editing}"></drivers>
+		<edit-plate plate-name="{editing.licensePlate}"></edit-plate>
+	</my-app>
+	
+</script>
+</div>
+<script id='drivers-stache' type='text/stache'>
+	<ul>
+	{{#each drivers}}
+		<li can-click="select">
+			{{title}} {{first}} {{last}} - {{licensePlate}}
+		</li>
+	{{/each}}
+	</ul>
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.stache.js"></script>
+<script id="demo-source">
+
+
+can.Component.extend({
+	tag: "my-app",
+	scope: {
+		editing: null
+	}
+});
+
+can.Component.extend({
+	tag: "drivers",
+	template: can.view("drivers-stache"),
+	scope: {
+		drivers: [
+			{ title: "Dr.", first: "Cosmo", last: "Kramer", licensePlate: "ASSMAN" },
+			{ title: "Ms.", first: "Elaine", last: "Benes", licensePlate: "621433" }
+		],
+		select: function(driver){
+			this.attr("selected", driver);
+		}
+	}
+});
+
+
+can.Component.extend({
+	tag: "edit-plate",
+	template: can.stache("<input value='{{plateName}}' can-change='update'/>"),
+	scope: {
+		update: function(context, el){
+			this.attr("plateName", el.val());
+		}
+	}
+});
+
+
+$("#out").html( can.view("app",{}) );
+
+
+</script>
+

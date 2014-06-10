@@ -1,0 +1,43 @@
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/stache">
+	<hello-world person="{data.owner}"></hello-world>
+</script>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.stache.js"></script>
+<script id="demo-source">
+
+can.Component.extend({
+	tag: "hello-world",
+	template: can.stache("<h1>Hello {{person.title}} {{person.first}} {{person.last}}!</h1>")
+});
+
+
+var data = new can.Map({
+	owner: {
+		title: "Dr.",
+		first: "Cosmo",
+		last: "Kramer",
+		licensePlate: "ASSMAN"
+	}
+});
+
+$("#out").html( can.view("app",{
+	data: data
+}) );
+
+setTimeout(function(){
+	
+	data.attr("owner",{
+		title: "Ms.",
+		first: "Elaine",
+		last: "Benes",
+		licensePlate: "Desire"
+	});
+	
+},2000);
+
+</script>
+

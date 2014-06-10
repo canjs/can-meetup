@@ -1,0 +1,25 @@
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/stache">
+	<foo-bar></foo-bar>
+</script>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.stache.js"></script>
+<script id="demo-source">
+
+var template = can.view("app");
+
+can.Component.extend({
+	tag: "foo-bar",
+	template: "Foo BARRED!"
+});
+
+$("#out").html( template()  );
+
+
+
+
+</script>
+

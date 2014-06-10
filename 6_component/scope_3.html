@@ -1,0 +1,30 @@
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/stache">
+	<counter>
+		<h2 can-click="add">Count {{count}}</h2>
+	</counter>
+</script>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.stache.js"></script>
+<script id="demo-source">
+
+can.Component.extend({
+	tag: "counter",
+	scope: {
+		count: 0,
+		add: function(){
+			this.attr("count", this.attr("count")+1);
+		}
+	}
+});
+
+
+$("#out").html( can.view("app",{}) );
+
+
+
+</script>
+

@@ -1,0 +1,30 @@
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/stache">
+	<h1>Outer Name: {{name}}</h1>
+	<add-data>
+		<h2>Inner Name: {{name}}</h2>
+	</add-data>
+</script>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.stache.js"></script>
+<script id="demo-source">
+
+can.Component.extend({
+	tag: "add-data",
+	scope: function(){
+		return new can.Map({name: "CanJS"});
+	}
+});
+
+
+$("#out").html( can.view("app",{
+	name: "jQuery++"
+}) );
+
+
+
+</script>
+

@@ -1,0 +1,38 @@
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/stache">
+	<counter>
+		{{#each numbers}}
+			<h3 can-click="add">+ {{.}}</h3>
+		{{/each}}
+		<h2>Total {{prettyCount}}</h2>
+	</counter>
+</script>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.stache.js"></script>
+<script id="demo-source">
+
+can.Component.extend({
+	tag: "counter",
+	scope: {
+		count: 0,
+		numbers: [1,2,3,4,5],
+		add: function(context, scope){
+			this.attr("count", this.attr("count")+context);
+		},
+		prettyCount: function(){
+			return ["zero","one","two","three","four",
+			"five","six","seven","eight","nine","ten"][this.attr("count")];
+		}
+	}
+});
+
+
+$("#out").html( can.view("app",{}) );
+
+
+
+</script>
+

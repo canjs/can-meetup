@@ -1,0 +1,98 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+<style type="text/css">
+body {font-family: verdana; padding: 10px;}
+my-modal {
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   right: 0px;
+   bottom: 0px;
+   z-index: 100;
+}
+
+.background {
+	width: 100%;
+	height: 100%;
+	background-color: #aCCaef;
+	opacity: 0.2;
+}
+
+.modal-container {
+	left: 50%;
+	top: 50%;
+	width: 600px;
+	height: 300px;
+	margin-top: -150px;
+	margin-left: -300px;
+	position: absolute;
+	border: 1px solid #e1e1e8;
+	background-color: white;
+}
+my-modal h3{
+	border-bottom: 1px solid #e1e1e8;
+	padding-left: 20px;
+	padding-bottom: 5px;
+}
+
+my-modal .modal-contents {
+	padding-left: 20px;
+}
+</style>
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/mustache">
+  <form>
+  	Meetup Name: <input can-value="value"/>.
+  	{{#if saving}} <span class='info'>Saving ...</span> {{/if}}
+  </form>
+</script>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.stache.js"></script>
+<script id="demo-source">
+
+can.Component.extend({
+	tag: "my-modal",
+	template: can.mustache(	
+		"<div class='background'></div>"+
+    	"<div class='modal-container'>"+
+    		"<h3>{{title}}</h3>"+
+    		"<div class='modal-contents'><content></content></div>"+
+		"</div>"),
+		
+	scope: {title: "@"}
+});
+
+
+var State = can.Map.extend({
+	init: function(){
+		this.attr("backup", this.attr("value"));
+	},
+	promptSave: function(){
+		return !this.attr("saving") &&
+			this.attr("backup") !== this.attr("value");
+	},
+	save: function(){
+		var self = this;
+		this.attr("saving", true);
+		setTimeout(function(){
+			self.attr({
+				saving: false,
+				backup: self.attr("value")
+			});
+		},1000);
+	},
+	cancel: function(){
+		this.attr("saving", false);
+		this.attr("value", this.attr("backup"));
+	}
+});
+
+var state =  new State({value: "CanJS Chicago"});
+
+$("#out").html( can.view("app",state));
+
+
+</script>
+

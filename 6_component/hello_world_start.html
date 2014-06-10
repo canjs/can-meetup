@@ -1,0 +1,15 @@
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/stache">
+	<hello-world></hello-world>
+</script>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.stache.js"></script>
+<script id="demo-source">
+
+$("#out").html( can.view("app",{}) );
+
+</script>
+
