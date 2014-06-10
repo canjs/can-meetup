@@ -2,6 +2,10 @@
 <script src="jquery.1.10.2.js"></script>
 <script src="can.jquery.js"></script>
 <script src="can.stache.js"></script>
+
+
+<my-slider value="{{#if}}foo{{{else}}"></my-slider>
+
 <script>
 
 	function sudoStache(template){
@@ -51,7 +55,7 @@
 			special: function(expression){
 				add(function(data){
 					var compute = can.compute(function(){
-						return can.compute.read(data, expression.split("."),{}).value
+						return can.compute.read(data, expression.split("."),{}).value;
 					});
 					can.view.live.text(this, compute);
 				});
@@ -59,7 +63,7 @@
 			end: can.k,
 			comment: can.k,
 			done: can.k
-		})
+		});
 		
 		var target = can.view.target(targetData);
 		

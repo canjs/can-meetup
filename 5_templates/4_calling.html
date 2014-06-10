@@ -12,9 +12,34 @@
 
 <p>{{#name}}{{first}} {{last}}{{/name}}</p>
 
+
+{{cap message}}
 	</script>
 	<script>
 		
+		
+	var age = can.compute(20);
+	
+	age() //-> 20
+	
+	age(31) 
+	
+	age() //-> 31
+	
+	age.bind("change", function(ev, newVal){
+		console.log("age is now", newVal)
+		
+	})
+
+	can.mustache.registerHelper("@indexPlusOne", function(options){
+		return options.scope.attr("@index")+1
+	})
+		
+	can.mustache("title","{{message}}")
+		
+	var renderer = can.mustache("{{>title}}")
+	renderer()
+	
 		
 	var renderer1 = can.mustache("<h1>{{message}}</h1>"),
 		renderer2 = can.view("hello-template"),
@@ -56,15 +81,17 @@ var o = {
 	
 	
 	can.stache.registerHelper("cap", function(arg){
-		return cap.toUpperCase();
+return arg === "hi" ?
+	options.fn({name: "cars"}) :
+	options.inverse();
 	});
 	
 	var renderer = can.stache("<h1>{{cap message}}</h1>");
 	
-	var frag renderer({message: "Hi"})
+	var frag = renderer({message: "hi"});
 	
-	
-	
+	frag //-> <h1>HI</h1>
+	new can.Map({message: "hi"})
 	</script>
 </body>
 

@@ -1,6 +1,8 @@
 <div id="demo-html">
+	
 <div id='out'></div>
-<script id="app" type="text/stache">
+
+<script id="app" type="text/mustache">
 	<hello-world></hello-world>
 </script>
 </div>
@@ -8,6 +10,20 @@
 <script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
 <script src="//canjs.com/release/2.1.1/can.stache.js"></script>
 <script id="demo-source">
+
+can.Component.extend({
+	tag: "hello-world",
+	template: "<h1>{{#if visible}}{{message}}{{else}}I'm shy{{/if}}</h1>",
+	scope: {
+		visible: false,
+		message: "Hello There"
+	},
+	events: {
+		click: function(){
+			this.scope.attr("visible", !this.scope.attr("visible"));
+		}
+	}
+});
 
 $("#out").html( can.view("app",{}) );
 

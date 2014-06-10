@@ -19,7 +19,7 @@ can.Component.extend({
 	scope: {
 		count: 0,
 		numbers: [1,2,3,4,5],
-		add: function(context, scope){
+		add: function(context, el, ev){
 			this.attr("count", this.attr("count")+context);
 		},
 		prettyCount: function(){

@@ -1,13 +1,20 @@
-<my-app>
-	<drivers selected="{editing}"></drivers>
-	<edit-plate plate-name="{editing.licensePlate}"></edit-plate>
-</my-app>
-
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/stache">
+	
+	<my-app>
+		<drivers selected="{editing}"></drivers>
+		<edit-plate plate-name="{editing.licensePlate}"></edit-plate>
+	</my-app>
+	
+</script>
+</div>
 <script id='drivers-stache' type='text/stache'>
 	<ul>
 	{{#each drivers}}
 		<li can-click="select">
 			{{title}} {{first}} {{last}} - {{licensePlate}}
+			{{#isEditing .}}<i>editing</i>{{/#isEditing}}
 		</li>
 	{{/each}}
 	</ul>
@@ -15,13 +22,22 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
 <script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
 <script src="//canjs.com/release/2.1.1/can.stache.js"></script>
-<script>
+<script id="demo-source">
 
 
-var MyApp = can.Component.extend({
+can.Component.extend({
 	tag: "my-app",
 	scope: {
 		editing: null
+	},
+	helpers: {
+		isEditing: function(item, options){
+			if(this.attr("editing") === item) {
+				return options.fn();
+			} else {
+				return options.inverse();
+			}
+		}
 	}
 });
 
@@ -50,15 +66,8 @@ can.Component.extend({
 	}
 });
 
-var app = $("my-app")[0];
 
-new MyApp(app, {
-  scope: new can.view.Scope({}),
-  options: new can.view.Options({}),
-  subtemplate: can.stache(app.innerHTML)
-});
-
-
+$("#out").html( can.view("app",{}) );
 
 
 </script>

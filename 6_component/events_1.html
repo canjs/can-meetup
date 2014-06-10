@@ -1,0 +1,151 @@
+<div id="demo-html">
+<div id='out'></div>
+<script id="app" type="text/mustache">
+	
+<my-app>
+
+	<div>
+		{{link "Drivers", "drivers"}}
+		{{link "DMVs", "dmvs"}}
+	</div>
+
+	{{#if showDMVS}}
+		<dmvs></dmvs>
+	{{/if}}
+	{{#if showDrivers}}
+		<drivers></drivers>
+	{{/if}}
+</my-app>
+	
+</script>
+</div>
+<script id='drivers-stache' type='text/mustache'>
+	<ul>
+	{{#if drivers.isPending}}
+		<li>Loading ...</li>
+	{{else}}
+		{{#each drivers}}
+			<li>
+				{{title}} {{first}} {{last}} - {{licensePlate}}
+			</li>
+		{{/each}}
+	{{/if}}
+	</ul>
+</script>
+<script id='dmvs-stache' type='text/mustache'>
+<ul>
+	{{#if zipCode}}
+		{{#if dmvs.isPending}}
+			<li>Loading ...</li>
+		{{else}}
+			{{#each dmvs}}
+				<li>
+					{{name}} - {{address}}
+				</li>
+			{{/each}}
+		{{/if}}
+	{{else}}
+		<input can-value='zipCode'/>
+	{{/if}}
+</ul>
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.1/can.stache.js"></script>
+<script src="//canjs.com/release/2.1.1/can.map.define.js"></script>
+<script src="//canjs.com/release/2.1.1/can.list.promise.js"></script>
+<script src="//canjs.com/release/2.1.1/can.fixture.js"></script>
+<script id="demo-source">
+
+can.fixture({
+	"/drivers": function(){
+		return [
+			{ title: "Dr.", first: "Cosmo", last: "Kramer", licensePlate: "ASSMAN" },
+			{ title: "Ms.", first: "Elaine", last: "Benes", licensePlate: "621433" }
+		];
+	},
+	"/dmvs": function(){
+		return [
+			{ name: "Melrose Park Sec. of State Facility.", address: "1903 North Mannheim Road Melrose Crossing Shopping Center" },
+			{ name: "Des Plaines Secretary of State Facility.", address: "1470 Lee St. Des" }
+		];
+	}
+});
+can.fixture.delay = 2000;
+
+var Driver = can.Model.extend({
+	findAll: "/drivers"
+},{});
+
+var Dmv = can.Model.extend({
+	findAll: "/dmvs"
+},{});
+
+
+var AppState = can.Map.extend({
+	define: {
+		showDrivers: {
+			get:function(){
+				return this.attr("page") === "drivers";
+			}
+		},
+		showDMVS: {
+			get: function(){
+				return this.attr("page") === "dmvs";
+			}
+		}
+	}
+});
+
+
+var state = new AppState();
+
+can.route(":page",{page: "drivers"});
+
+can.route.map(state);
+
+can.Component.extend({
+	tag: "my-app",
+	scope: state,
+	helpers: {
+		link: function(name, page){
+			return can.mustache.safeString(can.route.link(name, {page: page}));
+		}
+	}
+});
+
+can.Component.extend({
+	tag: "drivers",
+	template: can.view("drivers-stache"),
+	scope: {
+		drivers: new Driver.List()
+	},
+	events: {
+		inserted: function(){
+			this.scope.attr("drivers").replace( Driver.findAll() );
+		}
+	}
+});
+
+can.Component.extend({
+	tag: "dmvs",
+	template: can.view("dmvs-stache"),
+	scope: {
+		zipCode: null,
+		dmvs: new Dmv.List()
+	},
+	events: {
+		"{scope} zipCode": function(scope, ev, newVal){
+			this.scope.attr("dmvs").replace( Dmv.findAll({
+				zipCode: newVal
+			}));
+		}
+	}
+});
+
+can.route.ready();
+$("#out").html( can.view("app",{}) );
+
+
+</script>
+

@@ -11,7 +11,7 @@
 <script src="//canjs.com/release/2.1.1/can.stache.js"></script>
 <script id="demo-source">
 
-var AddDataViewModel = can.Map.extend({
+var CounterViewModel = can.Map.extend({
 	count: 0,
 	add: function(){
 		this.attr("count", this.attr("count")+1);
@@ -20,7 +20,7 @@ var AddDataViewModel = can.Map.extend({
 
 can.Component.extend({
 	tag: "counter",
-	scope: AddDataViewModel
+	scope: CounterViewModel
 });
 
 
