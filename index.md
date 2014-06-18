@@ -61,7 +61,7 @@ The [instantiate](http://canjs.com/docs/can.Component.html) cross binding exampl
 
 Example showing using [events](http://canjs.com/docs/can.Component.prototype.events.html) to animate elements:
 
-<a class="jsbin-embed" href="http://jsbin.com/nemew/1/embed?js,output">JS Bin</a>
+<a class="jsbin-embed" href="http://jsbin.com/niruw/2/embed?js,output">JS Bin</a>
 
 The [helpers](http://canjs.com/docs/can.Component.prototype.helpers.html) `isEditing` example:
 
