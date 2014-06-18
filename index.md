@@ -55,7 +55,7 @@ The [scope](http://canjs.com/docs/can.Component.prototype.scope.html) fancy coun
 
 <a class="jsbin-embed" href="http://jsbin.com/fayih/1/embed?js,output">JS Bin</a>
 
-The instantiate cross binding example:
+The [instantiate](http://canjs.com/docs/can.Component.html) cross binding example:
 
 <a class="jsbin-embed" href="http://jsbin.com/jowav/2/embed?js,output">JS Bin</a>
 
