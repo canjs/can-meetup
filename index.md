@@ -37,8 +37,6 @@ Here&apos;s a preview of what&apos;s happening in upcoming meetups.  Through bui
 
 Here's an overview of can.Component and a hello world example:
 
-<iframe width="560" height="315" src="//www.youtube.com/embed/BM1Jc3lVUrk" frameborder="0" allowfullscreen> </iframe>
-
 ## Sponsors and Organizers
 {% for city in site.cities %}
 ###[{{city.name}}]({{city.site}})
