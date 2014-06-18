@@ -59,6 +59,9 @@ The instantiate cross binding example:
 
 <a class="jsbin-embed" href="http://jsbin.com/jowav/2/embed?js,output">JS Bin</a>
 
+Example showing using events to animate elements:
+
+<a class="jsbin-embed" href="http://jsbin.com/nemew/1/embed?js,output">JS Bin</a>
 
 ## Sponsors and Organizers
 {% for city in site.cities %}
