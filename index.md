@@ -41,7 +41,7 @@ Here's an overview of can.Component and a hello world example:
 
 The end of the hello world example:
 
-<a class="jsbin-embed" href="http://jsbin.com/hotad/1/embed?js,output">JS Bin</a>
+<a class="jsbin-embed" href="http://jsbin.com/hotad/2/embed?js,output">JS Bin</a>
 
 And, an in-depth treatment of each of can.Component's APIs:
 
