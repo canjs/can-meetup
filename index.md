@@ -55,6 +55,11 @@ The scope fancy counter example:
 
 <a class="jsbin-embed" href="http://jsbin.com/fayih/1/embed?js,output">JS Bin</a>
 
+The instantiate cross binding example:
+
+<a class="jsbin-embed" href="http://jsbin.com/jowav/2/embed?js,output">JS Bin</a>
+
+
 ## Sponsors and Organizers
 {% for city in site.cities %}
 ###[{{city.name}}]({{city.site}})
