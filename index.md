@@ -39,6 +39,10 @@ Here's an overview of can.Component and a hello world example:
 
 <iframe width="100%" height="400" src="//www.youtube.com/embed/BM1Jc3lVUrk" frameborder="0"> </iframe>
 
+And, an in-depth treatment of each of can.Component's APIs:
+
+<iframe width="100%" height="400" src="//www.youtube.com/embed/ogX765S4iuc" frameborder="0"> </iframe>
+
 ## Sponsors and Organizers
 {% for city in site.cities %}
 ###[{{city.name}}]({{city.site}})
