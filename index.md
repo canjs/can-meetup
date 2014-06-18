@@ -47,11 +47,11 @@ And, an in-depth treatment of each of can.Component's APIs:
 
 <iframe width="100%" height="400" src="//www.youtube.com/embed/ogX765S4iuc" frameborder="0"> </iframe>
 
-The template modal example:
+The [template](http://canjs.com/docs/can.Component.prototype.template.html) modal example:
 
 <a class="jsbin-embed" href="http://jsbin.com/kapuh/1/embed?js,output">JS Bin</a>
 
-The scope fancy counter example:
+The [scope](http://canjs.com/docs/can.Component.prototype.scope.html) fancy counter example:
 
 <a class="jsbin-embed" href="http://jsbin.com/fayih/1/embed?js,output">JS Bin</a>
 
@@ -59,9 +59,14 @@ The instantiate cross binding example:
 
 <a class="jsbin-embed" href="http://jsbin.com/jowav/2/embed?js,output">JS Bin</a>
 
-Example showing using events to animate elements:
+Example showing using [events](http://canjs.com/docs/can.Component.prototype.events.html) to animate elements:
 
 <a class="jsbin-embed" href="http://jsbin.com/nemew/1/embed?js,output">JS Bin</a>
+
+The [helpers](http://canjs.com/docs/can.Component.prototype.helpers.html) `isEditing` example:
+
+<a class="jsbin-embed" href="http://jsbin.com/soyev/1/embed?js,output">JS Bin</a>
+
 
 ## Sponsors and Organizers
 {% for city in site.cities %}
