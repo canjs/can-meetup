@@ -33,7 +33,7 @@ Here&apos;s a preview of what&apos;s happening in upcoming meetups.  Through bui
 
 <iframe width="100%" height="400" src="//www.youtube.com/embed/QP9mHyxZNiI" frameborder="0"> </iframe>
 
-### can.Component
+### Components
 
 Here's an overview of can.Component and a hello world example:
 
