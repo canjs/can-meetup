@@ -47,6 +47,10 @@ And, an in-depth treatment of each of can.Component's APIs:
 
 <iframe width="100%" height="400" src="//www.youtube.com/embed/ogX765S4iuc" frameborder="0"> </iframe>
 
+The template modal example:
+
+<a class="jsbin-embed" href="http://jsbin.com/kapuh/1/embed?js,output">JS Bin</a>
+
 ## Sponsors and Organizers
 {% for city in site.cities %}
 ###[{{city.name}}]({{city.site}})
