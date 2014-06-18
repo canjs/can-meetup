@@ -39,8 +39,9 @@ Here's an overview of can.Component and a hello world example:
 
 <iframe width="100%" height="400" src="//www.youtube.com/embed/BM1Jc3lVUrk" frameborder="0"> </iframe>
 
-<a class="jsbin-embed" href="http://jsbin.com/hotad/1/embed?html,js,output">JS Bin</a>
+The end of the hello world example:
 
+<a class="jsbin-embed" href="http://jsbin.com/hotad/1/embed?js,output">JS Bin</a>
 
 And, an in-depth treatment of each of can.Component's APIs:
 
