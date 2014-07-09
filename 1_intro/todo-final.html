@@ -56,7 +56,7 @@
 </script>
 <script src='jquery.1.9.1.js'></script>
 <script src='can.jquery.js'></script>
-<script src='can.object.js'></script>
+<script src='can.stache.js'></script>
 <script src='can.fixture.js'></script>
 <div id='app'></div>
 
@@ -69,18 +69,18 @@
 				{ id: 0, name: "take out trash", completed: false },
 				{ id: 1, name: "mow lawn", completed: false },
 				{ id: 2, name: "pick up laundry", completed: true }
-			]
+			];
 		},
 		"POST /services/todos": function(){
 			return {
 				id: Math.floor( Math.random()*10000 )
-			}
+			};
 		},
 		"DELETE /services/todos/{id}": function(){
-			return {}
+			return {};
 		},
 		"PUT /services/todos/{id}": function(){
-			return {}
+			return {};
 		}
 	});
 	
@@ -90,32 +90,23 @@
 		create: "/services/todos",
 		destroy: "/services/todos/{id}",
 		update: "/services/todos/{id}"
-	},{})
+	},{});
 	
 	Todo.List = can.Model.List.extend({
 		Map: Todo
 	},{
-		filter: function(tester){
-			var todos = new Todo.List();
-			this.each(function(todo){
-				if(tester(todo)){
-					todos.push(todo)
-				}
-			})
-			return todos;
-		},
 		remainingCount: function(){
 			return this.remaining().length;
 		},
 		remaining: function(){
 			return this.filter(function(todo){
 				return !todo.attr('completed')
-			})
+			});
 		},
 		completed: function(){
 			return this.filter(function(todo){
 				return todo.attr('completed')
-			})
+			});
 		},
 		completedCount: function(){
 			return this.completed().length
@@ -123,9 +114,9 @@
 		destroyCompleted: function(){
 			this.completed().each(function(todo){
 				todo.destroy()
-			})
+			});
 		}
-	})
+	});
 	
 	
 	can.Component.extend({
@@ -140,7 +131,7 @@
 						name: el.val(),
 						completed: false
 					}).save();
-					el.val("")
+					el.val("");
 				}
 			}
 		}
@@ -151,16 +142,16 @@
 		template: can.view("todos-list-template"),
 		scope: {
 			edit: function(todo){
-				todo.attr("editing", true)
+				todo.attr("editing", true);
 			},
 			updateTodo: function(todo, el){
 				todo.attr("name", el.val());
-				todo.attr("editing",false)
+				todo.attr("editing",false);
 			}
 		},
 		events: {
 			"{Todo} created": function(Todo, ev, newTodo){
-				this.scope.attr('todos').push(newTodo)
+				this.scope.attr('todos').push(newTodo);
 			}
 		}
 	});
@@ -170,13 +161,13 @@
 		scope: {
 			todos: new Todo.List({}),
 			displayedTodos: function(){
-				var filter = can.route.attr("filter")
+				var filter = can.route.attr("filter");
 				if(filter == "active"){
-					return this.attr('todos').remaining()
+					return this.attr('todos').remaining();
 				} else if(filter == "completed") {
-					return this.attr('todos').completed()
+					return this.attr('todos').completed();
 				} else {
-					return this.attr('todos')
+					return this.attr('todos');
 				}
 			}
 		},
@@ -193,21 +184,21 @@
 				
 				return can.route.link(title,attr,{
 					className: can.route.attr("filter") == filter ? "selected" : ""
-				})
+				});
 			}
 		},
 		events: {
 			"#toggle-all click": function(el){
 				var completed = el.prop("checked")
 				this.scope.attr('todos').each(function(todo){
-					todo.attr("completed", completed)
-				})
+					todo.attr("completed", completed);
+				});
 			}
 		}
-	})
+	});
 	
-	can.route.ready()
-	var frag = can.view("todos-app-template",{})
+	can.route.ready();
+	var frag = can.view("todos-app-template",{});
 	
 	
 	

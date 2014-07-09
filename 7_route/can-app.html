@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<style>
+	body {margin: 10px;}
+	#navigation {
+		margin-bottom: 20px;
+	}
+	.main {border: solid 1px blue;background-color: white;}
+</style>
+
+<div class='container'>
+	<div id="navigation"></div>
+	<div style='position:relative'>
+		<div id="main" class='main'>Loading ....</div>
+	</div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.2/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.2/can.stache.js"></script>
+<script src="//canjs.com/release/2.1.2/can.map.define.js"></script>
+<script src="//canjs.com/release/2.1.2/can.list.promise.js"></script>
+<script src="//canjs.com/release/2.1.2/can.fixture.js"></script>
+<script src="helpers.js"></script>
+<script src="can.app.js"></script>
+<script src="contact.js"></script>
+
+
+<script type='text/stache' id='nav-stache'>
+	<nav>
+		{{linkUnlessCurrent "home" page='home'}}
+		{{linkUnlessCurrent "contacts" page='contacts'}}
+	</nav>
+</script>
+
+
+<script id="demo-source">
+
+	can.app({
+		"import": function(componentName,callback){
+			var script = document.createElement("script");
+			script.src = "components/"+componentName.substr(2)+".js";
+			script.onload = callback;
+			document.body.appendChild(script);
+		},
+		componentTemplates: {
+			"b-contacts": "<b-contacts page='{contactPage}'></b-contacts>",
+			"b-contact": "<b-contact contact-id='{contactId}'></b-contact>",
+		},
+		component: function(){
+			return "b-"+can.route.attr("page");	
+		},
+		scope: can.route.data,
+		animate: function(newContainer, oldContainer, done){
+			$(oldContainer).fadeOut();
+			
+			$(newContainer).css("position","absolute")
+				.css({top: "0px"})
+				.width( $(oldContainer).width() )
+			.fadeIn("slow",function(){
+				done();
+				$(newContainer).css({
+					position: "", top: "",width: ""
+				});
+			});
+			
+		},
+		element: "main"
+	});
+
+	can.route(":page",{page: "home"});
+	
+	
+	$("#navigation").html( can.view("nav-stache",{}) );
+
+	can.route.ready();
+
+</script>
+

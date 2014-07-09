@@ -22,7 +22,7 @@ can.Component.extend({
 		add: function(context, el, ev){
 			this.attr("count", this.attr("count")+context);
 		},
-		prettyCount: function(){
+		prettyCount: function(context, mustacheScope){
 			return ["zero","one","two","three","four",
 			"five","six","seven","eight","nine","ten"][this.attr("count")];
 		}

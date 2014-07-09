@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<style>
+	body {margin: 10px;}
+</style>
+<div id='out'>
+	
+<ul id="recipes" class="tabs ui-helper-clearfix nav nav-tabs">
+  <li><a href="#recipe1">Recipe 1</a></li>
+  <li><a href="#recipe2">Recipe 2</a></li>
+  <li><a href="#recipe3">Recipe 3</a></li>
+</ul>
+<div id="recipe1" class="tab">
+	Recipe 1 Content
+</div>
+<div id="recipe2" class="tab">
+	Recipe 2 Content
+</div>
+<div id="recipe3" class="tab">
+	Recipe 3 Content
+</div>
+<br/><br/>
+<ul id="tasks" class="tabs ui-helper-clearfix nav nav-tabs">
+  <li><a href="#task1">Task 1</a></li>
+  <li><a href="#task2">Task 2</a></li>
+  <li><a href="#task3">Task 3</a></li>
+</ul>
+<div id="task1" class="tab">
+	Task 1 Content
+</div>
+<div id="task2" class="tab">
+	Task 2 Content
+</div>
+<div id="task3" class="tab">
+	Task 3 Content
+</div>
+	
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.2/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.2/can.stache.js"></script>
+<script src="//canjs.com/release/2.1.2/can.map.define.js"></script>
+<script src="//canjs.com/release/2.1.2/can.list.promise.js"></script>
+<script src="//canjs.com/release/2.1.2/can.fixture.js"></script>
+
+<script id="demo-source">
+
+
+  var HistoryTabs = can.Control.extend({
+    init: function( el ) {
+      
+      // hide all tabs
+      var tab = this.tab;
+      this.element.children( 'li' ).each(function() {
+        tab( $( this ) ).hide();
+      });
+      
+      // activate the first tab
+      var active = this.options.tab();
+      this.activate(active)
+    },
+    "{tab} change" : function(tab, ev, newVal, oldVal){
+    	this.activate(newVal, oldVal)
+    },
+    // helper function finds the tab for a given li
+    tab: function( li ) {
+      return $( li.find( 'a' ).attr( 'href' ) );
+    },
+    // helper function finds li for a given id
+    button : function(id){
+    	// if nothing is active, activate the first
+    	return id ? this.element.find("a[href=#"+id+"]").parent() : this.element.children( 'li:first' );
+    },
+    // activates 
+    activate: function( active, oldActive ){
+    	// deactivate the old active
+    	var oldButton = this.button(oldActive).removeClass('active');
+    	this.tab(oldButton).hide();
+    	// activate new
+    	var newButton = this.button(active).addClass('active');
+    	this.tab(newButton).show();
+    },
+    "li click" : function(el, ev){
+    	// prevent the default setting
+    	ev.preventDefault();
+    	// update the route data
+    	this.options.tab(this.tab(el)[0].id);
+    }
+  });
+
+  can.route(":recipe",{
+  	recipe: "recipe1",
+  	task: "task3"
+  });
+  
+  can.route(":recipe/:task",{
+  	recipe: "recipe1",
+  	task: "task3"
+  });
+  
+  // adds the controller to the element
+  new HistoryTabs( '#recipes',{tab: can.route.compute("recipe")});
+  new HistoryTabs( '#tasks',{tab: can.route.compute("task")});
+
+  can.route.ready();
+
+</script>
+

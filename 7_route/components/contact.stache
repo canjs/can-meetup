@@ -1,0 +1,6 @@
+{{#contact}}
+  <h1>{{first}} {{last}}</h1>
+  <p>{{address}}</p>
+{{else}}
+  Loading ...
+{{/contact}}

@@ -1,0 +1,228 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<style>
+	body {
+		margin: 10px;
+	}
+</style>
+<div id="app"></div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.2/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.2/can.stache.js"></script>
+<script src="//canjs.com/release/2.1.2/can.map.define.js"></script>
+<script src="//canjs.com/release/2.1.2/can.list.promise.js"></script>
+<script src="//canjs.com/release/2.1.2/can.fixture.js"></script>
+
+<script type='text/stache' id="app-stache">
+	<b-app page="{pageNum}">
+		<p>{{paginate.page}} of {{paginate.pageCount}}</p>
+		<contacts-list paginate="{paginate}">
+			<ul>
+				{{#if contacts.isPending}}
+					<li>Loading</li>
+			    {{/if}}
+			    {{#if contacts.isResolved}}
+			      {{#if contacts.length}}
+			        {{#each contacts}}
+			          <li>{{first}} {{last}}</li>
+			        {{/each}}
+			      {{else}}
+			        <li>No items</li>
+			      {{/if}}
+			    {{/if}}
+		    </ul>
+		</contacts-list>
+		<h3>Simple</h3> 
+		<p>
+			
+			{{#if paginate.canPrev}}
+				<button can-click='paginate.prev' class='btn'>prev</button>
+			{{/if}} 
+			{{#if paginate.canNext}}
+				<button can-click='paginate.next' class='btn'>next</button>
+			{{/if}}
+		</p>
+		
+		<h3>Bookmarkable</h3>
+		<p>
+			{{#if paginate.canPrev}}
+				{{link "prev" pageNum=paginate.prevPageNum}}
+			{{/if}} 
+			{{#if paginate.canNext}}
+				{{link "next" pageNum=paginate.nextPageNum}}
+			{{/if}} 
+		</p>
+		
+		<b-paginate paginate="{paginate}">
+			
+		</b-paginate>
+		
+	</b-app>
+</script>
+
+<script id="demo-source">
+	var firsts = ["Nate", "Danny", "Allen", "Kevin", "Giovanni", "Ron", "Gabe", "Kim", "Sara", "Christy", "Payal", "Kathrine", "Paula"], 
+	    lasts = ["Shah", "Meyer", "Jazwiak", "Anderson", "Eck", "Joshnson", "Montgomery", "Phillips", "Arroyo", "Larson", "Gonzalez"];
+
+	var contactStore = can.fixture.store(100, function(id) {
+		return {
+			id : id,
+			first : can.fixture.rand(firsts,1)[0],
+			last : can.fixture.rand(lasts,1)[0]
+		};
+	});
+
+	can.fixture("/services/contacts", contactStore.findAll);
+
+	Contact = can.Model.extend({
+		resource : "/services/contacts"
+	}, {});
+
+	can.fixture.delay = 1000;
+
+	var Paginate = can.Map.extend({
+		define : {
+			count : {
+				type : "number",
+				value : Infinity,
+				// Keeps count above 0.
+				set : function(newCount) {
+					return newCount < 0 ? 0 : newCount;
+				}
+			},
+			offset : {
+				type : "number",
+				value : 0,
+				// Keeps offset between 0 and count
+				set : function(newOffset) {
+					console.log("SETTING","newValue=", newOffset);
+					var count = this.attr("count");
+					return newOffset < 0 ? 0 : Math.min(newOffset, !isNaN(count - 1) ? count - 1 : Infinity);
+				}
+			},
+			limit : {
+				type : "number",
+				value : 20
+			},
+			page : {
+				// Setting page changes the offset
+				set : function(newVal) {
+					this.attr('offset', (parseInt(newVal) - 1) * this.attr('limit'));
+				},
+				// The page value is derived from offset and limit.
+				get : function(newVal) {
+					return Math.floor(this.attr('offset') / this.attr('limit')) + 1;
+				}
+			},
+			pageCount: {
+				get: function(){
+					return this.attr('count') ? Math.ceil(this.attr('count') / this.attr('limit')) : null;
+				}
+			},
+			nextPageNum: {
+				get: function(){
+					return this.attr("page")+1;
+				}
+			},
+			prevPageNum: {
+				get: function(){
+					return this.attr("page")-1;
+				}
+			}
+		},
+		next : function() {
+			this.attr('offset', this.offset + this.limit);
+		},
+		prev : function() {
+			this.attr('offset', this.offset - this.limit);
+		},
+		canNext : function() {
+			return this.attr('offset') < this.attr('count') - this.attr('limit');
+		},
+		canPrev : function() {
+			return this.attr('offset') > 0;
+		}
+	});
+
+	can.Component.extend({
+		tag: "b-app",
+		scope: {
+			define: {
+				paginate: {
+					Value: Paginate
+				},
+				page: {
+					type: "number",
+					get: function(){
+						return this.attr("paginate").attr("page");
+					},
+					set: function(newValue){
+						return this.attr("paginate").attr("page",newValue);
+					}
+				}
+			}
+		}
+	});
+
+	can.Component.extend({
+		tag: "contacts-list",
+		scope: {
+			define: {
+				contacts: {
+					Value: Contact.List,
+					get: function(current){
+						var paginate = this.attr("paginate"),
+							offset = paginate.attr("offset");
+						console.log("GETTING CONTACTS", "paginate.offset=",offset);
+						var deferred = Contact.findAll({
+							offset: offset,
+							limit: paginate.attr("limit")
+						});
+						setTimeout(function(){
+							current.replace(deferred);
+						},1);
+						
+						deferred.then(function(items){
+							paginate.attr("count",items.count);
+						});
+						return current;
+					}
+				}
+			}
+		}
+	});
+
+
+	can.Component.extend({
+		tag: "c-paginate",
+		scope: {
+			define: {
+				
+			}
+		}
+	});
+	
+	can.route(":pageNum");
+	
+	can.stache.registerHelper("link",function(text, options){
+		var params = {};
+		can.each(options.hash,function(value, name){
+			params[name] = can.isFunction(value) ? value() : value;
+		});
+		return can.stache.safeString( can.route.link(text, params) );
+	});
+	
+	
+
+	$("#app").html(can.view("app-stache",{
+		pageNum: can.route.compute("pageNum")
+	}));
+
+
+
+	
+
+	can.route.ready();
+
+</script>
+

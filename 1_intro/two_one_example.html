@@ -1,0 +1,103 @@
+<div id='out'></div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.2/can.jquery.dev.js"></script>
+<script src="//canjs.com/release/2.1.2/can.stache.js"></script>
+<script src="//canjs.com/release/2.1.2/can.map.define.js"></script>
+<script src="//canjs.com/release/2.1.2/can.list.promise.js"></script>
+<script src="//canjs.com/release/2.1.2/can.fixture.js"></script>
+
+<script type='text/stache' id='app'>
+	{{#if id}}
+		<a href="#!">back</a>
+		{{#if recipe}}
+			<h2>Recipe - {{recipe.name}}</h2>
+			<p>{{recipe.description}}</p>
+			<blockquote>{{recipe.instructions}}</blockquote>
+		{{else}}
+			<h2>Recipe</h2>
+			<p>Loading ....</p>
+		{{/if}}
+	{{else}}
+		<h2>Recipes</h2>
+		{{#if recipes.isPending}}
+			<p>Loading ....</p>
+		{{/if}}
+		{{#if recipes.isResolved}}
+			<ul>
+				{{#each recipes}}
+					<li>{{link name id}}</li>
+				{{/each}}
+			</ul>
+		{{/if}}
+	{{/if}}
+</script>
+
+<script>
+// Fixtures - simulate AJAX requests
+
+var recipesStore = can.fixture.store([
+	{ id: 1, name: "Ice Water", description: "A cool drink", instructions: "Pour water over ice." },
+	{ id: 2, name: "Hot Dog", description: "A Chicago classic", instructions: "Grill and serve with vegies." }
+]);
+can.fixture({
+	"/recipes": recipesStore.findAll,
+	"/recipes/{id}": recipesStore.findOne
+});
+can.fixture.delay = 2000;
+
+// Models - create, read, update, delete data on the server
+var Recipe = can.Model.extend({
+	findAll: "/recipes",
+	findOne: "/recipes/{id}"
+},{});
+
+
+// ViewModel - controls the behavior of the application
+var AppState = can.Map.extend({
+	define: {
+		recipes: {
+			value: new Recipe.List(),
+			get: function(current){
+				if(this.attr("id") == null && !current.attr("length")) {
+					current.replace(Recipe.findAll());
+				} 
+				return current;
+			}
+		},
+		recipe: {
+			get: function(current, set){
+				var id= this.attr("id"),
+					recipes = this.attr("recipes");
+				if(id != null) {
+					if( recipes.attr("length")  ) {
+						recipes.each(function(recipe){
+							if(recipe.attr("id") == id) {
+								set(recipe);
+							}
+						});
+					} else {
+						Recipe.findOne({id: id}, set);
+					}
+				}		
+			}
+		}
+	}
+});
+var state =  new AppState();
+
+can.route.map(state);
+
+can.route("recipe/:id");
+can.route.ready();
+
+
+can.stache.registerHelper("link", function(name, id){
+	
+	return can.stache.safeString( can.route.link(name(),{id: id()}) );
+});
+
+
+$("#out").html(can.view("app", state));
+
+</script>

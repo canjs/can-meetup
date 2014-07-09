@@ -1,0 +1,38 @@
+<p>{{paginate.page}} of {{paginate.pageCount}}</p>
+<contacts-list paginate="{paginate}">
+	<ul>
+		{{#if contacts.isPending}}
+			<li>Loading</li>
+	    {{/if}}
+	    {{#if contacts.isResolved}}
+	      {{#if contacts.length}}
+	        {{#each contacts}}
+	          <li><a href="{{url page='contact' contactId=id}}">{{first}} {{last}}</a></li>
+	        {{/each}}
+	      {{else}}
+	        <li>No items</li>
+	      {{/if}}
+	    {{/if}}
+    </ul>
+</contacts-list>
+<h3>Simple</h3> 
+<p>
+	
+	{{#if paginate.canPrev}}
+		<button can-click='paginate.prev' class='btn'>prev</button>
+	{{/if}} 
+	{{#if paginate.canNext}}
+		<button can-click='paginate.next' class='btn'>next</button>
+	{{/if}}
+</p>
+
+<h3>Bookmarkable</h3>
+<p>
+	{{#if paginate.canPrev}}
+		{{link "prev" page='contacts'  contactPage=paginate.prevPageNum}}
+	{{/if}} 
+	{{#if paginate.canNext}}
+		{{link "next" page='contacts' contactPage=paginate.nextPageNum}}
+	{{/if}} 
+</p>
+

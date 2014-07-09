@@ -3,7 +3,6 @@
 <script id="app" type="text/mustache">
 	
 <my-app>
-
 	<div>
 		{{link "Drivers", "drivers"}}
 		{{link "DMVs", "dmvs"}}
@@ -56,7 +55,7 @@
 can.fixture({
 	"/drivers": function(){
 		return [
-			{ title: "Dr.", first: "Cosmo", last: "Kramer", licensePlate: "ASSMAN" },
+			{ title: "Dr.", first: "Cosmo", last: "Kramer", licensePlate: "543210" },
 			{ title: "Ms.", first: "Elaine", last: "Benes", licensePlate: "621433" }
 		];
 	},
@@ -95,10 +94,12 @@ var AppState = can.Map.extend({
 
 
 var state = new AppState();
+can.route.map(state);
+
 
 can.route(":page",{page: "drivers"});
 
-can.route.map(state);
+
 
 can.Component.extend({
 	tag: "my-app",
@@ -135,6 +136,7 @@ can.Component.extend({
 		}
 	}
 });
+
 
 can.route.ready();
 $("#out").html( can.view("app",{}) );
