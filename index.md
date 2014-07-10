@@ -67,6 +67,21 @@ The [helpers](http://canjs.com/docs/can.Component.prototype.helpers.html) `isEdi
 
 <a class="jsbin-embed" href="http://jsbin.com/soyev/1/embed?js,output">JS Bin</a>
 
+### Routing
+
+Here's an overview of can.route and a tabs example:
+
+<iframe width="100%" height="400" src="//www.youtube.com/embed/ef0LKDiaPZ0" frameborder="0"> </iframe>
+
+The single tabs exercise:
+
+<a class="jsbin-embed" href="http://jsbin.com/nonado/2/embed?js,output">JS Bin</a>
+
+The historyTabs jQuery plugin:
+
+<a class="jsbin-embed" href="http://jsbin.com/fehuz/1/embed?js,output">JS Bin</a>
+
+
 
 ## Sponsors and Organizers
 {% for city in site.cities %}
@@ -101,7 +116,6 @@ The [helpers](http://canjs.com/docs/can.Component.prototype.helpers.html) `isEdi
 {% endunless %}
 
 {% endfor %}
-
 
 ## Get Involved
 
