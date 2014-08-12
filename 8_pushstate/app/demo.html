@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+<body>
+	<div id='app'></div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+	<script src="//canjs.com/release/2.1.2/can.jquery.js"></script>
+	<script src="//canjs.com/release/2.1.2/can.route.pushstate.js"></script>
+	<script src="//canjs.com/release/2.1.2/can.stache.js"></script>
+	<script src="//canjs.com/release/2.1.2/can.map.define.js"></script>
+	<script src="//canjs.com/release/2.1.2/can.list.promise.js"></script>
+	<script src="//canjs.com/release/2.1.2/can.fixture.js"></script>
+	<script id="demo-source">
+		can.route.bindings.pushstate.root = "/8_pushstate/app/"
+		can.route(":page", {page: 'homepage'});
+		can.route("contacts/:username");
+		can.route("books/:genre/:author");
+		can.route.ready(); 
+
+		// can.route.attr('page', 'about');
+		// can.route.attr(); //-> {page: "about", route: ":page"}
+		// without cleaning current can.route state
+		// can.route.attr('username', 'brian');
+		// can.route.attr(); //-> {page: "about", route: ":page", username: 'brian'}
+		// with cleaning current can.route state
+		// can.route.attr({username: 'brian'}, true);
+		// can.route.attr(); //-> {username: "brian", route: "contacts/:username"}
+	</script>
+</html>

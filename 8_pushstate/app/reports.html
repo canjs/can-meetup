@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TPS Report Viewer</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<style>
+		body {
+			margin: 10px;
+		}
+	</style>
+<body>
+	<div id='app'></div>
+	<script type='text/stache' id="index-stache">
+		<aside id="filters">
+			<search-filter searchTerm='{searchTerm}'></search-filter>
+			<flag-filter flags='{flags}'></flag-filter>
+		</aside>
+		<report-list reports='{reports}'></report-list>
+	</script>
+	<script type='text/stache' id="flag-filter-stache">
+		{{#flags}}
+			<div class="flag">
+				<input type="checkbox" can-value='{selected}'>
+				<span class="name">{{name}}</span>
+			</div>
+		{{/flags}}
+	</script>
+	<script type='text/stache' id="report-list-stache">
+		<ul>
+			{{#each reports}}
+			<li class="report">
+				<input type='checkbox' can-value="{selected}" />
+				<span class="name">{{name}}</span>
+				<div class="flags">{{formatFlags .}}</div>
+			</li>
+			{{/each}}
+		</ul>
+	</script>
+	<script type='text/stache' id="search-filter-stache">
+		<input type="search" id="search" placeholder="Report Name" can-value="{searchTerm}">
+	</script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+	<script src="//canjs.com/release/2.1.2/can.jquery.js"></script>
+	<script src="//canjs.com/release/2.1.2/can.route.pushstate.js"></script>
+	<script src="//canjs.com/release/2.1.2/can.stache.js"></script>
+	<script src="//canjs.com/release/2.1.2/can.map.define.js"></script>
+	<script src="//canjs.com/release/2.1.2/can.list.promise.js"></script>
+	<script src="//canjs.com/release/2.1.2/can.fixture.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+	<script id="demo-source">
+
+
+	can.route.bindings.pushstate.root = "/8_pushstate/app/";
+	// can.route("/:selectedFlags/:searchTerm");
+	// can.route("/all", {selectedFlags: "ABC"});
+
+	var flags = [
+		{
+			name: 'A'
+		},
+		{
+			name: 'B'
+		},
+		{
+			name: 'C'
+		}
+	];
+	
+	can.fixture('GET /flags', function(req){
+		return flags;
+	});
+
+		// for convenience's sake
+	var reports = [
+		{
+			name: 'Important TPS Report 1',
+			flags: ['B', 'C']
+		},
+		{
+			name: 'Funky RFP Report 2',
+			flags: ['A', 'B', 'C']
+		},
+		{
+			name: 'Strange NSA Consultation 3',
+			flags: ['A']
+		},
+		{
+			name: 'Happy TLA Recording 4',
+			flags: ['A', 'C']
+		}
+	];
+	
+	can.fixture('GET /reports', function(req){
+		console.log('get reports', req.data)
+		var flags = [];
+		if(req.data.flags && req.data.flags !== ""){
+			flags = req.data.flags.split("");
+		}
+		return _.filter(reports, function(report){
+			return (report.name.indexOf(req.data.searchTerm) === 0 && 
+				(flags.length? _.intersection(flags, report.flags).length === flags.length: true));
+		})
+	});
+
+	var Reports = can.Model.extend({
+		findAll: 'GET /reports'
+	}, {
+		selected: false
+	});		
+
+	var Flags = can.Model.extend({
+		findAll: 'GET /flags'
+	}, {});
+
+	var AppState = can.Map.extend({
+		define: {
+			// A list of the reports currently being shown in the page.
+			// The reports will refresh when a filter changes or search 
+			// term is added.
+			reports: {
+				get: function(){
+					// until flags loads, don't actually get a value for reports
+					if(this.attr('flags').isPending()) {
+						return;
+					}
+					return new Reports.List({
+						searchTerm: this.attr('searchTerm'),
+						flags: this.define.selectedFlags.serialize.apply(this)
+					})
+				},
+				serialize: false
+			},
+			flags: {
+				value: new Flags.List({}),
+				serialize: false
+			},
+			// A virtual property showing the flags the user has selected
+			// Used to represent the reports in the serialized route.
+			// Example: "AB"
+			selectedFlags: {
+				serialize: function(){
+					var selectedFlags = this.attr('flags').filter(function(flag){
+						return flag.attr('selected');
+					});
+					var ids = _.pluck(selectedFlags, 'name');
+					return ids.join('')
+				},
+				set: function(val){
+	                var arr = val.split('');
+	                // for each id, toggle any matched flag
+	                this.attr('flags').each(function(flag){
+	                    if(arr.indexOf(flag.attr('name')) !== -1){
+	                        flag.attr('selected', true);
+	                    } else {
+	                        flag.attr('selected', false)
+	                    }
+	                })
+            	}
+			},
+			// A term the user is searching for
+			searchTerm: {
+				value: ""
+			}
+		}
+	});
+
+	can.Component.extend({
+		tag: 'flag-filter',
+		template: can.view("flag-filter-stache")
+	});
+
+	can.Component.extend({
+		tag: 'report-list',
+		template: can.view("report-list-stache"),
+		helpers: {
+			formatFlags: function(report) {
+				return report.flags.join('');
+			}
+		}
+	});
+
+	can.Component.extend({
+		tag: 'search-filter',
+		template: can.view("search-filter-stache")
+	});
+
+	$(document).ready(function(){
+		window.appState = new AppState();
+		can.route.map(appState);
+		can.route.ready();
+		$("#app").html(can.view("index-stache", appState));
+	})
+	</script>
+</html>

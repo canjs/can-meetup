@@ -1,0 +1,62 @@
+body {
+	font-family: sans-serif;
+	font-size: 16px;
+}
+
+#filters {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 159px;
+
+	padding: 16px 8px;
+
+	border-right: 1px #aaaabb solid;
+	box-shadow: 1px 0px 10px #aaaabb;
+}
+
+#search {
+	width: 100%;
+}
+
+flag-filter {
+	margin-top: 8px;
+}
+
+.flag {
+	margin-bottom: 4px;
+}
+
+.flag input {
+	margin-right: 4px;
+}
+
+report-list {
+	position: absolute;
+	top: 0;
+	left: 176px;
+	right: 0;
+	padding: 16px 8px;
+}
+
+report-list ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.report {
+	padding: 8px 12px;
+	border: 1px solid #aaaabb;
+	margin-bottom: 4px;
+	min-height: 1.2em;
+}
+
+.report > .name {
+	color: #333366;
+}
+
+.report > .flags {
+	float: right;
+}
