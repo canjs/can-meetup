@@ -99,15 +99,15 @@
   	  task = task || "task3";
   	
   	  if(started) {
-        if(recipe !== activeRecipe) {
-          recipesTab.activate(recipe,activeRecipe );
-        }
-        if(task !== activeTask) {
-          tasksTab.activate(task,activeTask );
-        }
-      } 
-      activeRecipe = recipe;
-      activeTask = task;
+  	    if(recipe !== activeRecipe) {
+              recipesTab.activate(recipe,activeRecipe );
+  	    }
+  	    if(task !== activeTask) {
+  	      tasksTab.activate(task,activeTask );
+  	    }
+  	  } 
+  	  activeRecipe = recipe;
+  	  activeTask = task;
     }
   });
   
