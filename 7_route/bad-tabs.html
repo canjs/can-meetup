@@ -99,15 +99,15 @@
   	  task = task || "task3";
   	
   	  if(started) {
-        if(recipe !== activeRecipe) {
-          recipesTab.activate(recipe,activeRecipe );
-        }
-        if(task !== activeTask) {
-          tasksTab.activate(task,activeTask );
-        }
-      } 
-      activeRecipe = recipe;
-      activeTask = task;
+  	    if(recipe !== activeRecipe) {
+              recipesTab.activate(recipe,activeRecipe );
+  	    }
+  	    if(task !== activeTask) {
+  	      tasksTab.activate(task,activeTask );
+  	    }
+  	  } 
+  	  activeRecipe = recipe;
+  	  activeTask = task;
     }
   });
   
@@ -123,7 +123,7 @@
   started = true;
   
   var navigate = function(recipe, task){
-  	var url = recipe+"/"+task;
+    var url = recipe+"/"+task;
     if( recipe === "recipe1" && task === "task3" ) {
       url = "";
     } else if( task === "task3" ) {
@@ -136,13 +136,13 @@
   recipesTab = new HistoryTabs( '#recipes',{
   	tab: activeRecipe,
   	navigate: function(recipe){
-      navigate(recipe, activeTask);
+  	  navigate(recipe, activeTask);
   	}
   });
   tasksTab = new HistoryTabs( '#tasks',{
   	tab: activeTask,
   	navigate: function(task){
-      navigate(activeRecipe, task);
+  	  navigate(activeRecipe, task);
   	}
   });
 
