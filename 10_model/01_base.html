@@ -1,0 +1,53 @@
+<html>
+	<style>
+		.list { float: left; width: 300px; }
+	</style>
+	<div class='list'>
+		<h2>Owner 1's</h2>
+		<div id='first'></div>
+	</div>
+	<div class='list'>
+		<h2>Owner 1's</h2>
+		<div id='second'></div>
+	</div>
+	
+<script id='app-template' type='text/stache'>
+	{{#each todos}}
+		<li><input type='checkbox' can-value='completed'/> {{name}}</li>
+	{{/each}}
+</script>
+	<script src="https://raw.githubusercontent.com/lodash/lodash/2.4.1/dist/lodash.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+	<script src="http://canjs.com/release/2.1.3/can.jquery.js"></script>
+	<script src="http://canjs.com/release/2.1.3/can.list.promise.js"></script>
+	<script src="http://canjs.com/release/2.1.3/can.object.js"></script>
+	<script src="http://canjs.com/release/2.1.3/can.fixture.js"></script>
+	<script src="http://canjs.com/release/2.1.3/can.stache.js"></script>
+	<script>
+can.fixture.delay = 1000;
+
+var todosStore = can.fixture.store(100, function(i){
+	return {
+		name: "todo "+i,
+		completed: Math.random() > 0.5 ? true : false,
+		ownerId: can.fixture.rand(6)
+	};
+});
+
+can.fixture("todos", todosStore.findAll);
+
+Todo = can.Model.extend({
+	resource: "todos"
+},{});
+
+$("#first").html("Loading...");
+Todo.findAll({ownerId: 1},function(todos){
+	$("#first").html(can.view("app-template",{todos: todos}));
+	$("#second").html("Loading...");
+	Todo.findAll({ownerId: 1},function(todos){
+		$("#second").html(can.view("app-template",{todos: todos}));
+	});
+});
+
+	  </script>
+</html>
