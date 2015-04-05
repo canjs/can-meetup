@@ -1,0 +1,55 @@
+<html>
+<head>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	<style>
+		#slider-container {
+			width: 425px;
+		}
+		body {
+			margin: 8px;
+		}
+	</style>
+</head>
+<body>
+  REQUEST
+  <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+  <script src="http://jquerypp.com/release/latest/jquerypp.js"></script>
+  <script src="http://canjs.com/release/minor/can.jquery.js"></script>
+  <script src="http://canjs.com/release/minor/can.object.js"></script>
+  <script src="http://canjs.com/release/minor/can.fixture.js"></script>
+  <script>
+    
+	/*can.fixture("/services/makes", function(){
+		return [{
+			id: 0,
+			name: "Toyota"
+		},{
+			id: 1,
+			name: "Ford"
+		}]
+	});
+	
+	can.fixture("GET /services/models/{makeId}", function(request, response){
+		
+		
+		if(request.data.makeId == 0) {
+			return [{id: 0, name: "Camry"}]
+		} else {
+			return [{id: 1, name: "Focus"}]
+		}
+	})*/
+	
+	can.fixture.delay = 1000;
+
+	$(document.body).click(function(){
+		console.log("requesting")
+		$.get("/services/models/0",function(data){
+			console.log(data)
+		})
+	})
+	
+    
+  </script>
+</body>
+</html>

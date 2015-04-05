@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.2/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.2/can.stache.js"></script>
+<script src="//canjs.com/release/2.1.2/can.map.define.js"></script>
+<script src="//canjs.com/release/2.1.2/can.list.promise.js"></script>
+<script src="//canjs.com/release/2.1.2/can.fixture.js"></script>
+<style> body {margin: 10px;} .tab {margin: 10px;}</style>
+	
+	
+<ul id="devTypes" class="nav nav-tabs">
+  <li><a href="#frameworks">Frameworks</a></li>
+  <li><a href="#libraries">Libraries</a></li>
+  <li><a href="#toolkits">Toolkits</a></li>
+</ul>
+<div id="frameworks" class="tab">
+	Frameworks Content
+</div>
+<div id="libraries" class="tab">
+	Libraries Content
+</div>
+<div id="toolkits" class="tab">
+	Toolkit Content
+</div>
+
+
+<script id="demo-source">
+
+$("#devTypes a").bind("click",function(ev){
+	ev.preventDefault();
+	can.route.attr("devType", $(this).attr("href").substr(1) );
+});
+
+can.route.bind("devType",function(ev, newValue){
+	$("#devTypes a").each(function(){
+		var tabName = $(this).attr("href").substr(1);
+		if( tabName === newValue ) {
+			$("#"+tabName).fadeIn("slow");
+		} else {
+			$("#"+tabName).hide();
+		}
+	});
+});
+
+ 
+can.route(":devType",{devType: "frameworks"});
+can.route.ready();
+
+</script>
+

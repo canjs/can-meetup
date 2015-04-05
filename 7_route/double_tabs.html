@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="//canjs.com/release/2.1.2/can.jquery.js"></script>
+<script src="//canjs.com/release/2.1.2/can.stache.js"></script>
+<script src="//canjs.com/release/2.1.2/can.map.define.js"></script>
+<script src="//canjs.com/release/2.1.2/can.list.promise.js"></script>
+<script src="//canjs.com/release/2.1.2/can.fixture.js"></script>
+<style> body {margin: 10px;} .tab {margin: 10px;}</style>
+	
+	
+<ul id="devTypes" class="nav nav-tabs">
+  <li><a href="#frameworks">Frameworks</a></li>
+  <li><a href="#libraries">Libraries</a></li>
+  <li><a href="#toolkits">Toolkits</a></li>
+</ul>
+<div id="frameworks" class="tab">
+	Frameworks Content
+</div>
+<div id="libraries" class="tab">
+	Libraries Content
+</div>
+<div id="toolkits" class="tab">
+	Toolkit Content
+</div>
+
+<ul id="teamTypes" class="nav nav-tabs">
+  <li><a href="#frontend">Front End</a></li>
+  <li><a href="#backend">Back End</a></li>
+  <li><a href="#qa">QA</a></li>
+</ul>
+<div id="frontend" class="tab">
+	Front End Content
+</div>
+<div id="backend" class="tab">
+	Back End Content
+</div>
+<div id="qa" class="tab">
+	QA Content
+</div>
+
+
+<script id="demo-source">
+
+$.fn.historyTabs = function(attr){
+	
+	this.on("click","a",function(ev){
+		ev.preventDefault();
+		can.route.attr(attr, $(this).attr("href").substr(1) );
+	});
+	var self = this;
+	can.route.bind(attr,function(ev, newValue){
+		self.find("a").each(function(){
+			var tabName = $(this).attr("href").substr(1);
+			if( tabName === newValue ) {
+				$("#"+tabName).fadeIn("slow");
+				$(this).parent().addClass("active");
+			} else {
+				$("#"+tabName).hide();
+				$(this).parent().removeClass("active");
+			}
+		});
+	});
+
+};
+
+$("#devTypes").historyTabs("devType");
+$("#teamTypes").historyTabs("teamType");
+
+can.route("",{devType: "frameworks", teamType: "frontend"});
+can.route(":devType",{teamType: "frontend"});
+can.route(":devType/:teamType");
+
+can.route.ready();
+
+</script>
+
